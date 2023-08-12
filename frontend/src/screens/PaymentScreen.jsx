@@ -7,6 +7,7 @@ import CheckoutSteps from "../components/CheckoutSteps";
 import { savePaymentMethod } from "../slices/cartSlice";
 
 const PaymentScreen = () => {
+  /* const [paymentMethod, setPaymentMethod] = useState("PayPal"); */
   const [paymentMethod, setPaymentMethod] = useState("PayPal");
 
   const dispatch = useDispatch();
@@ -24,16 +25,17 @@ const PaymentScreen = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(savePaymentMethod(paymentMethod));
+    console.log(paymentMethod);
     navigate("/placeorder");
   };
 
   return (
     <FormContainer>
       <CheckoutSteps step1 step2 step3 />
-      <h1>Payment Method</h1>
+      <h1>Método de pago</h1>
       <Form onSubmit={submitHandler}>
         <Form.Group>
-          <Form.Label as="legend">Select Method</Form.Label>
+          <Form.Label as="legend">Seleccionar método</Form.Label>
           <Col>
             <Form.Check
               type="radio"
@@ -42,13 +44,34 @@ const PaymentScreen = () => {
               id="PayPal"
               name="paymentMethod"
               value="PayPal"
-              checked
-              onChange={(e) => setPaymentMethod(e.target.value)}
+              onClick={(e) => setPaymentMethod(e.target.value)}
             ></Form.Check>
           </Col>
+          <Col>
+            <Form.Check
+              type="radio"
+              className="my-2"
+              label="Mercadopago"
+              id="Mercadopago"
+              name="paymentMethod"
+              value="Mercadopago"
+              onClick={(e) => setPaymentMethod(e.target.value)}
+            ></Form.Check>
+          </Col>
+          {/* <Col>
+            <Form.Check
+              type="radio"
+              className="my-2"
+              label="Transferencia"
+              id="Transferencia"
+              name="paymentMethod"
+              value="Transferencia"
+              onClick={(e) => setPaymentMethod(e.target.value)}
+            ></Form.Check>
+          </Col> */}
         </Form.Group>
         <Button type="submit" variant="primary">
-          Continue
+          Continuar
         </Button>
       </Form>
     </FormContainer>

@@ -32,6 +32,7 @@ import ProductEditScreen from "./screens/admin/ProductEditScreen";
 import UserListScreen from "./screens/admin/UserListScreen";
 import UserEditScreen from "./screens/admin/UserEditScreen";
 
+
 const router = createBrowserRouter(
   //crea el enrutador
   createRoutesFromElements(
@@ -50,6 +51,7 @@ const router = createBrowserRouter(
         <Route path='/payment' element={<PaymentScreen />} />
         <Route path='/placeorder' element={<PlaceOrderScreen />} />
         <Route path='/order/:id' element={<OrderScreen />} />
+        <Route path='/order/:id/ordenPaga' element={<OrderScreen />} />
         <Route path='/profile' element={<ProfileScreen />} />
       </Route>
 

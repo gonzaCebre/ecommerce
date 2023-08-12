@@ -57,25 +57,25 @@ const PlaceOrderScreen = () => {
         <Col md={8}>
           <ListGroup variant="flush">
             <ListGroupItem>
-              <h2>Shipping</h2>
+              <h2>Envío</h2>
               <p>
-                <strong>Address:</strong>
+                <strong>Dirección:</strong>
                 {cart.shippingAddress.address}, {cart.shippingAddress.city},{" "}
                 {cart.shippingAddress.postalCode},{" "}
                 {cart.shippingAddress.country}
               </p>
             </ListGroupItem>
             <ListGroupItem>
-              <h2>Payment Method</h2>
+              <h2>Método de pago</h2>
               <p>
-                <strong>Method:</strong>
+                <strong>Método:</strong>
                 {cart.paymentMethod}
               </p>
             </ListGroupItem>
             <ListGroupItem>
-              <h2>Order Items</h2>
+              <h2>Tu compra</h2>
               {cart.cartItems.legth === 0 ? (
-                <Message>Your cart is empty</Message>
+                <Message>Tu carrito está vacío</Message>
               ) : (
                 <ListGroup variant="flush">
                   {cart.cartItems.map((item, index) => (
@@ -103,7 +103,7 @@ const PlaceOrderScreen = () => {
                 </ListGroup>
               )}
               <p>
-                <strong>Method:</strong>
+                <strong>Método:</strong>
                 {cart.paymentMethod}
               </p>
             </ListGroupItem>
@@ -113,23 +113,23 @@ const PlaceOrderScreen = () => {
           <Card>
             <ListGroup variant="flush">
               <ListGroupItem>
-                <h2>Order Summary</h2>
+                <h2>Resumen de compra</h2>
               </ListGroupItem>
               <ListGroupItem>
                 <Row>
-                  <Col>Items:</Col>
+                  <Col>Productos:</Col>
                   <Col>${cart.itemsPrice}</Col>
                 </Row>
               </ListGroupItem>
               <ListGroupItem>
                 <Row>
-                  <Col>Shipping:</Col>
+                  <Col>Envío:</Col>
                   <Col>${cart.shippingPrice}</Col>
                 </Row>
               </ListGroupItem>
               <ListGroupItem>
                 <Row>
-                  <Col>Tax:</Col>
+                  <Col>Recargo:</Col>
                   <Col>${cart.taxPrice}</Col>
                 </Row>
               </ListGroupItem>
@@ -151,7 +151,7 @@ const PlaceOrderScreen = () => {
                   disabled={cart.cartItems.length === 0}
                   onClick={placeOrderHandler}
                 >
-                  Place Order
+                  Ir a pagar
                 </Button>
                 {isLoading && <Loader />}
               </ListGroupItem>

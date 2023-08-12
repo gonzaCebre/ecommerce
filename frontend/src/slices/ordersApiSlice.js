@@ -1,5 +1,5 @@
 import {apiSlice} from './apiSlice'
-import { ORDERS_URL, PAYPAL_URL } from '../constants'
+import { MERCADOPAGO_URL, MERCADOPAGO_URL_PUBLIC_KEY, ORDERS_URL, PAYPAL_URL } from '../constants'
 
 export const ordersApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -29,6 +29,12 @@ export const ordersApiSlice = apiSlice.injectEndpoints({
             }),
             keepUnusedDataFor: 5,
         }),
+        getMercadopagoPublicKey: builder.query({
+            query: () => ({
+                url: MERCADOPAGO_URL_PUBLIC_KEY,
+            }),
+            keepUnusedDataFor: 5,
+        }),
         getMyOrders: builder.query({
             query: () => ({
                 url: `${ORDERS_URL}/mine`,
@@ -50,4 +56,4 @@ export const ordersApiSlice = apiSlice.injectEndpoints({
     }),
 });
 
-export const {useCreateOrderMutation, useGetOrderDetailsQuery, usePayOrderMutation, useGetPayPalClientIdQuery, useGetMyOrdersQuery, useGetOrdersQuery, useDeliverOrderMutation} = ordersApiSlice;
+export const {useCreateOrderMutation, useGetOrderDetailsQuery, usePayOrderMutation, useGetPayPalClientIdQuery, useGetMyOrdersQuery, useGetOrdersQuery, useDeliverOrderMutation, useGetMercadopagoPublicKeyQuery} = ordersApiSlice;
