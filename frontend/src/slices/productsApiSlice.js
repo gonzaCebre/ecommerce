@@ -62,9 +62,20 @@ export const productsApiSlice = apiSlice.injectEndpoints({
         url: `${PRODUCTS_URL}/top`
       }),
       keepUnusedDataFor: 5
-    })
+    }),
+    getProductsByCategory: builder.query({
+      query: ({ category, pageNumber  }) => ({
+        url: `${PRODUCTS_URL}/category/${category}`, //'api/products'
+        params: {
+          category,
+          pageNumber,          
+        }
+      }),
+      providesTags: ['Products'], //Esta opcion evita que tengamos que refrescar manualmente la pagina
+      keepUnusedDataFor: 5,
+    }),
   }),
 });
 
-export const { useGetProductsQuery, useGetProductDetailsQuery, useCreateProductMutation, useUpdateProductMutation, useUploadProductImageMutation, useDeleteProductMutation, useCreateReviewMutation, useGetTopProductsQuery } =
+export const { useGetProductsQuery, useGetProductDetailsQuery, useCreateProductMutation, useUpdateProductMutation, useUploadProductImageMutation, useDeleteProductMutation, useCreateReviewMutation, useGetTopProductsQuery, useGetProductsByCategoryQuery } =
   productsApiSlice;

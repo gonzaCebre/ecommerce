@@ -1,0 +1,25 @@
+.search-box{
+    width: 70%;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+
+    margin: 1.2rem 0;
+
+    .form-control{
+        width: 60%;
+        border: 2px solid $violet;
+        margin-right: 1rem;
+    }
+
+}
+
+//CELU
+@media only screen and (max-width: 767px) {
+    .search-box{
+        align-items: center;
+        .form-control{
+            height: 80%;
+        }
+    }
+}

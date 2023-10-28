@@ -1,0 +1,76 @@
+.categories{
+    width: 100%;   
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    position: relative;
+    padding: 2rem;
+    color: $black;
+    
+
+}
+
+.violet-plain{
+    fill:#5D4A9E;
+}
+
+.violet-final{
+    fill:#5D4A9E;
+    stroke:#000000;
+    stroke-width:4;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    stroke-miterlimit:10;
+}
+
+.verde{
+    
+    fill:#00B156;
+    stroke:#000000;
+    stroke-width:4;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    stroke-miterlimit:10;
+}
+
+.portatucas, .filtros, .pikas, .sedas, .cogolleros, .fuegos, .llaveros{
+    
+    fill:#5D4A9E;
+    stroke:#000000;
+    stroke-width:4;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    stroke-miterlimit:10;
+
+    &:hover{
+        fill:#00B156;
+        cursor: pointer;
+        /* cursor: url('../../media/dedo-alien.png'), pointer; */
+    }
+}
+
+.cogollos{
+    
+    fill:#5D4A9E;
+    stroke:#000000;
+    stroke-width:4;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    stroke-miterlimit:10;
+}
+
+
+.bandeja{
+    fill:#5D4A9E;
+    stroke:#000000;
+    stroke-width:4;
+    stroke-miterlimit:10;
+}
+
+.texts{
+    fill: #000000 !important;
+    stroke: none;
+}
+
+

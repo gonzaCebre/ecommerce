@@ -1,0 +1,79 @@
+.payment-method{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    margin-bottom: 2rem;
+    
+    &__form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+
+
+//CELU
+@media only screen and (max-width: 767px) {
+    .payment-method{    
+        .alien-wallet{
+            width: 18%;
+            margin-right: 2rem;
+        }
+
+        &__form{
+            label{
+                font-size: 1rem;
+            }
+        }
+    }
+}
+
+// TABLET
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+    .payment-method{    
+        .alien-wallet{
+            width: 18%;
+            margin-right: 2rem;
+        }
+
+        &__form{
+            label{
+                font-size: 1.2rem;
+            }
+        }
+    }
+}
+
+// COMPU
+@media only screen and (min-width: 993px) and (max-width: 1200px) {
+    .payment-method{    
+        .alien-wallet{
+            width: 18%;
+            margin-right: 2rem;
+        }
+
+        &__form{
+            label{
+                font-size: 1.3rem;
+            }
+        }
+    }
+}
+
+// XL
+@media only screen and (min-width: 1201px) {
+    .payment-method{    
+        .alien-wallet{
+            width: 18%;
+            margin-right: 2rem;
+        }
+
+        &__form{
+            label{
+                font-size: 1.3rem;
+            }
+        }
+    }
+}

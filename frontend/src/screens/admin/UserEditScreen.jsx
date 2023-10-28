@@ -3,7 +3,6 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
-import FormContainer from "../../components/FormContainer";
 import { toast } from "react-toastify";
 import {
   useUpdateUserMutation,
@@ -50,11 +49,11 @@ const UserEditScreen = () => {
   };
 
   return (
-    <>
-      <Link to="/admin/userlist" className="btn btn-light my-3">
+    <div className="admin">
+      <Link to="/admin/userlist" className="button--green">
         Go back
       </Link>
-      <FormContainer>
+      <div>
         <h1>Edit user</h1>
         {loadingUpdate && <Loader />}
 
@@ -91,13 +90,13 @@ const UserEditScreen = () => {
               ></Form.Check>
             </Form.Group>
 
-            <Button type="submit" variant="primary" className="my-2">
+            <Button type="submit" variant="primary" className="button--violet">
               Update
             </Button>
           </Form>
         )}
-      </FormContainer>
-    </>
+      </div>
+    </div>
   );
 };
 

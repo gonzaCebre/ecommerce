@@ -1,14 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import {
-  Row,
-  Col,
-  ListGroup,
-  Image,
-  Form,
-  Button,
-  Card,
-  ListGroupItem,
-} from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import { addToCart, removeFromCart } from "../slices/cartSlice";
@@ -33,29 +24,27 @@ const CartScreen = () => {
   };
 
   return (
-    <Row>
-      <Col md={8}>
-        <h1 style={{ marginBottom: "20px" }}>Carrito de compras</h1>
+    <div className="cart-screen">
+      <div className="cart-screen__cart">
+        <h1>Carrito de compras</h1>
 
         {cartItems.length === 0 ? (
           <Message>
-            Tu carrito está vacío <Link to='/'>Volver</Link>
+            Tu carrito está vacío <Link to="/">Volver</Link>
           </Message>
         ) : (
-          <ListGroup variant='flush'>
+          <div className="cart-screen__cart__items">
             {cartItems.map((item) => (
-              <ListGroupItem key={item._id}>
-                <Row>
-                  <Col md={2}>
-                    <Image src={item.image} alt={item.name} fluid rounded />
-                  </Col>
-                  <Col md={3}>
-                    <Link to={`/product/${item._id}`}>{item.name}</Link>
-                  </Col>
-                  <Col md={2}>${item.price}</Col>
-                  <Col md={2}>
+              <div className="cart-screen__cart__items__item" key={item._id}>
+                <img src={item.image} alt={item.name} />
+                <div className="cart-screen__cart__items__item__resume">
+                  <Link to={`/product/${item._id}`}>{item.name}</Link>
+
+                  <h3>${item.price * item.qty}</h3>
+
+                  <div className="cart-screen__cart__items__item__resume__controls">
                     <Form.Control
-                      as='select'
+                      as="select"
                       value={item.qty}
                       onChange={(e) =>
                         addToCartHandler(item, Number(e.target.value))
@@ -67,49 +56,39 @@ const CartScreen = () => {
                         </option>
                       ))}
                     </Form.Control>
-                  </Col>
-                  <Col md={2}>
-                    <Button
-                      type='button'
-                      variant='light'
+                    <i
+                      className="fa fa-trash"
                       onClick={() => removeFromCartHandler(item._id)}
-                    >
-                      <i className='fa fa-trash'></i>
-                    </Button>
-                  </Col>
-                </Row>
-              </ListGroupItem>
+                    ></i>
+                  </div>
+                </div>
+              </div>
             ))}
-          </ListGroup>
+          </div>
         )}
-      </Col>
-      <Col md={4}>
-        <Card>
-          <ListGroup variant='flush'>
-            <ListGroupItem>
-              <h2>
-                Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)})
-                items
-              </h2>
-              ${" "}
-              {cartItems
-                .reduce((acc, item) => acc + item.qty * item.price, 0)
-                .toFixed(2)}
-            </ListGroupItem>
-            <ListGroupItem>
-              <Button
-                type='button'
-                className='btn-block'
-                disabled={cartItems.length === 0}
-                onClick={checkoutHandler}
-              >
-                Ir a pagar
-              </Button>
-            </ListGroupItem>
-          </ListGroup>
-        </Card>
-      </Col>
-    </Row>
+      </div>
+      <div className="cart-screen__resume">
+        <h2>
+          Subtotal: ${" "}
+          {cartItems
+            .reduce((acc, item) => acc + item.qty * item.price, 0)
+            .toFixed(2)}{" "}
+        </h2>
+        <div className="cart-screen__resume__buttons">
+          <Link to="/products" className="button--violet">
+            Seguir comprando
+          </Link>
+          <Button
+            type="button"
+            className="btn-block button--green"
+            disabled={cartItems.length === 0}
+            onClick={checkoutHandler}
+          >
+            Ir a pagar
+          </Button>
+        </div>
+      </div>
+    </div>
   );
 };
 

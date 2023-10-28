@@ -1,0 +1,49 @@
+.slider{
+    height: 40px;
+    width: 100vw;
+    margin: auto;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: $black;
+    /* border-top: 4px solid $black;
+    border-bottom: 4px solid $black; */
+  
+/*     hr{
+      border: 2px solid black;
+      width: 100%;
+      margin: 0.5rem 0;
+    } */
+  
+    &__track{
+      display: flex;
+      justify-content: flex-start;
+      /* width: calc(120px * 18); */
+  
+      .slide{
+        color: $green;
+        font-size: 18px;
+        height: 30px;
+        margin: 0;
+        font-family: $title;
+        text-transform: uppercase;
+        width: 120px;
+        animation: scroll 10s linear infinite;
+      }
+  
+      @keyframes scroll {
+        0%{
+          transform: translateX(0);
+        }
+        100%{
+          transform: translateX(calc(120px * 6));
+        }
+      }
+    }
+  }
+
+  .cogollin{
+    height: 26px;
+  }

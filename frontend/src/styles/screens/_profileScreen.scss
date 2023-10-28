@@ -1,0 +1,54 @@
+.user-profile{
+    margin: 2.5rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    h2{
+        color: $violet;
+    }
+
+    &__profile, &__compras{
+        font-family: $text;
+        font-weight: 600;
+        color: black;
+        border: 4px solid $violet;
+        border-radius: 25px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0.3rem 0.3rem $violet;
+        width: 80%;
+    }
+
+    &__profile{
+        &__form{
+            input{
+                border: 2px solid $violet;
+            }
+            button{
+                margin: auto;
+                margin-top: 1.3rem;
+            }
+        }
+    }
+
+    &__compras{
+        table{
+            width: 100%;
+
+            thead{
+                border-top: 2px solid $violet;
+                border-bottom: 2px solid $violet;
+                width: 100%;
+            }
+            tbody{
+                tr{
+                    border-bottom: 2px solid $violet;
+                }
+            }
+        }
+    }
+
+}

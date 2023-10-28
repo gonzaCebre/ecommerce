@@ -1,5 +1,5 @@
 import { LinkContainer } from "react-router-bootstrap";
-import { Table, Button, Row, Col } from "react-bootstrap";
+import { Table, Button } from "react-bootstrap";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 import Loader from "../../components/Loader";
@@ -49,16 +49,10 @@ const ProductListScreen = () => {
 
   return (
     <>
-      <Row className="align-items-center">
-        <Col>
-          <h1>Products</h1>
-        </Col>
-        <Col className="text-end">
-          <Button className="btn-sm m-3" onClick={createProductHandler}>
-            <FaEdit /> Create Product
-          </Button>
-        </Col>
-      </Row>
+      <h1>Products</h1>
+      <button className="button--violet" onClick={createProductHandler}>
+        <FaEdit /> Create Product
+      </button>
       {loadingCreate && <Loader />}
       {loadingDelete && <Loader />}
       {isLoading ? (
@@ -67,7 +61,7 @@ const ProductListScreen = () => {
         <Message variant="danger">{error}</Message>
       ) : (
         <>
-          <Table striped hover responsive className="table-sm">
+          <Table striped hover responsive className="table-sm my-4">
             <thead>
               <tr>
                 <th>ID</th>

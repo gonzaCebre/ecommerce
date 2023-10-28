@@ -1,0 +1,184 @@
+.shipping-form{
+
+    background-color: $green;
+    border-radius: 1.5rem;
+    color: $violet;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__item{
+        width: 90%;
+    }
+
+    .shipping-cost{
+        background-color: $violet;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 1rem;
+
+        p{
+            margin: 0;
+        }
+
+    }
+}
+
+//CELU
+@media only screen and (max-width: 767px) {
+    .shipping-form{
+        width: 80%;
+        margin: auto;
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+
+        &__item{
+            margin-bottom: 1rem;
+
+            .form-label{
+                font-size: 1.1rem;
+            }
+        }
+
+        .shipping-cost{
+            width: 70%;
+            padding: 0.7rem 0;
+            margin: 1.2rem 0;
+
+            h3{
+                font-size: 1rem;
+            }
+            p{
+                font-size: 1.3rem;
+            }
+
+            .shipping-cba{
+                font-size: 0.7rem;
+            }
+        }
+        button{
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+    }
+}
+
+// TABLET
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+    .shipping-form{
+        width: 70%;
+        margin: auto;
+        margin-bottom: 2rem;
+        padding: 1.8rem;
+
+        &__item{
+            margin-bottom: 1rem;
+            
+            .form-label{
+                font-size: 1.3rem;
+            }
+        }
+
+        .shipping-cost{
+            width: 50%;
+            padding: 0.7rem 0;
+            margin: 1.4rem 0;
+
+            h3{
+                font-size: 1.2rem;
+            }
+            p{
+                font-size: 1.5rem;
+            }
+            .shipping-cba{
+                font-size: 0.9rem;
+            }
+        }
+        button{
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+    }
+}
+
+// COMPU
+@media only screen and (min-width: 993px) and (max-width: 1200px) {
+    .shipping-form{
+        width: 65%;
+        margin: auto;
+        margin-bottom: 2rem;
+        padding: 1.8rem;
+
+        &__item{
+            margin-bottom: 1rem;
+            
+            .form-label{
+                font-size: 1.4rem;
+            }
+        }
+
+        .shipping-cost{
+            width: 40%;
+            padding: 0.7rem 0;
+            margin: 1.4rem 0;
+
+            h3{
+                font-size: 1.3rem;
+            }
+            p{
+                font-size: 1.6rem;
+            }
+            
+            .shipping-cba{
+                font-size: 1rem;
+            }
+        }
+        button{
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+    }
+}
+
+// XL
+@media only screen and (min-width: 1201px) {
+    .shipping-form{
+        width: 60%;
+        margin: auto;
+        margin-bottom: 2rem;
+        padding: 1.8rem;
+
+        &__item{
+            margin-bottom: 1rem;
+            
+            .form-label{
+                font-size: 1.4rem;
+            }
+        }
+
+        .shipping-cost{
+            width: 30%;
+            padding: 0.7rem 0;
+            margin: 1.4rem 0;
+
+            h3{
+                font-size: 1.3rem;
+            }
+            p{
+                font-size: 1.6rem;
+            }
+            
+            .shipping-cba{
+                font-size: 1.1rem;
+            }
+        }
+        button{
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+    }
+}

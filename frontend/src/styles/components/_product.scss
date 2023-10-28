@@ -1,0 +1,19 @@
+.product-card{
+    background-color: $violet;
+    border: 3px solid $violet;
+    box-shadow: 0.5rem 0.5rem $violet;
+
+    &:hover{
+        background-color: $green;
+        border: 3px solid $violet;
+    }
+
+    &__link {
+        color: white;
+        text-decoration: none;
+
+        &:hover{
+            color: black;
+        }
+    }
+}

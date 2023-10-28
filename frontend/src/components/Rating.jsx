@@ -2,7 +2,7 @@ import React from "react";
 
 const Rating = ({ value, text, color }) => {
   return (
-    <div className='rating'>
+    <div className="rating">
       <span>
         <i
           style={{ color }}
@@ -69,7 +69,7 @@ const Rating = ({ value, text, color }) => {
 };
 
 Rating.defaultProps = {
-  color: "#f8e825",
+  color: "#00B156",
 };
 
 export default Rating;

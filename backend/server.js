@@ -27,10 +27,6 @@ app.use(cors());
 //Cookie parser middleware
 app.use(cookieParser()); //Nos permite acceder a las cookies
 
-app.get("/", (req, res) => {
-  res.send("API is running");
-});
-
 app.use("/api/products", productRoutes); //Todo lo que vaya a '/api/products' lo va a procesar productRoutes
 app.use("/api/users", userRoutes); //Todo lo que vaya a '/api/users' lo va a procesar productRoutes
 app.use("/api/orders", orderRoutes); //Todo lo que vaya a '/api/orders' lo va a procesar productRoutes
@@ -40,9 +36,29 @@ app.use("/api/payment", paymentRoutes); //Todo lo que vaya a '/api/payment' lo v
 app.get('/api/config/paypal', (req, res) => res.send({clientId: process.env.PAYPAL_CLIENT_ID}))
 app.get('/api/config/mercadopago', (req, res) => res.send({publicKey: process.env.MERCADOPAGO_PUBLIC_KEY}))
 
+app.get('/api/config/instagram', (req, res) => res.send({igToken: process.env.IG_TOKEN}))
+
+
+
 //convirtiendo la carpeta de 'uploads' en estatica
 const __dirname = path.resolve(); //Setea __dirname al directorio actual
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
+
+//Preparando para produccion
+if(process.env.NODE_ENV === 'production'){
+  //Seteando la carpeta estatica
+  app.use(express.static(path.join(__dirname, '/frontend/build')));
+
+  //Cualquier ruta que no este en la api va a redireccionar a index.html
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
+  });
+} else {
+  app.get("/", (req, res) => {
+    res.send("API is running");
+  });
+}
+
 
 
 //Middlewares

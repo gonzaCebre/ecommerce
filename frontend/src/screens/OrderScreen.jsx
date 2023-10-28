@@ -48,6 +48,9 @@ const OrderScreen = () => {
     isError,
   } = useGetOrderDetailsQuery(orderId);
 
+  useEffect(() => {
+    console.log(order);
+  }, [order]);
   //Para poder actualizar el pago de la orden
   const [payOrder, { isLoading: loadingPay }] = usePayOrderMutation();
 
@@ -233,163 +236,147 @@ const OrderScreen = () => {
     <Message variant="danger" />
   ) : (
     <>
-      <h1>Orden: {order._id}</h1>
-      <Row>
-        <Col md={8}>
-          <ListGroup variant="flush">
-            <ListGroupItem>
-              <h2>Envío</h2>
-              <p>
-                <strong>Nombre: </strong> {order.user.name}
-              </p>
-              <p>
-                <strong>Email: </strong> {order.user.email}
-              </p>
-              <p>
-                <strong>Dirección: </strong> {order.shippingAddress.address},{" "}
-                {order.shippingAddress.city} ,{" "}
-                {order.shippingAddress.postalCode},{" "}
-                {order.shippingAddress.country}
-              </p>
-              {order.isDelivered ? (
-                <Message variant="success">
-                  Despachado el {order.deliveredAt}
-                </Message>
-              ) : (
-                <Message variant="danger">No despachado</Message>
-              )}
-            </ListGroupItem>
-            <ListGroupItem>
-              <h2>Método de pago</h2>
-              <p>
-                <strong>Método: </strong>
-                {order.paymentMethod}
-              </p>
-              {order.isPaid ? (
-                <Message variant="success">
-                  Pagado el{" "}
-                  {new Intl.DateTimeFormat("es-ES").format(
-                    new Date(order.paidAt)
-                  )}
-                </Message>
-              ) : (
-                <Message variant="danger">No pagado</Message>
-              )}
-            </ListGroupItem>
-            <ListGroupItem>
-              <h2>Tu compra: </h2>
-              {order.orderItems.map((item, index) => (
-                <ListGroupItem key={index}>
-                  <Row>
-                    <Col md={1}>
-                      <Image src={item.image} alt={item.name} fluid rounded />
-                    </Col>
-                    <Col>
-                      <Link to={`/product/${item.product}`}>{item.name}</Link>
-                    </Col>
-                    <Col md={4}>
-                      {item.qty} x ${item.price} = ${item.qty * item.price}
-                    </Col>
-                  </Row>
-                </ListGroupItem>
-              ))}
-            </ListGroupItem>
-          </ListGroup>
-        </Col>
-        <Col md={4}>
-          <Card>
-            <ListGroup variant="flush">
-              <ListGroupItem>
-                <h2>Resumen de compra</h2>
-              </ListGroupItem>
-              <ListGroupItem>
-                <Row>
-                  <Col>Productos:</Col>
-                  <Col>${order.itemsPrice}</Col>
-                </Row>
-                <Row>
-                  <Col>Envío</Col>
-                  <Col>${order.shippingPrice}</Col>
-                </Row>
-                <Row>
-                  <Col>Recargo</Col>
-                  <Col>${order.taxPrice}</Col>
-                </Row>
-                <Row>
-                  <Col>Total</Col>
-                  <Col>${order.totalPrice}</Col>
-                </Row>
-              </ListGroupItem>
+      <h1>Finalizar compra</h1>
+      {/* <h1>Orden: {order._id}</h1> */}
 
-              {!order.isPaid && order.paymentMethod === "PayPal" && (
-                <ListGroupItem>
-                  {loadingPay && <Loader />}
+      <div className="order">
+        <div className="order__description">
+          <div className="order__description__item">
+            <h2>Orden N°:</h2>
+            <p>{order._id}</p>
+          </div>
+
+          <div className="order__description__item">
+            <h2>Envío</h2>
+            <p>
+              <strong>Nombre: </strong> {order.user.name}
+            </p>
+            <p>
+              <strong>Dirección: </strong> {order.shippingAddress.address},{" "}
+              {order.shippingAddress.city} , {order.shippingAddress.postalCode},{" "}
+              {order.shippingAddress.country}
+            </p>
+            {order.isDelivered ? (
+              <Message variant="success">
+                Despachado el {order.deliveredAt}
+              </Message>
+            ) : (
+              <Message variant="danger">No despachado</Message>
+            )}
+          </div>
+          <div className="order__description__item">
+            <h2>Método de pago</h2>
+            <p>
+              <strong>Método: </strong>
+              {order.paymentMethod}
+            </p>
+            {order.isPaid ? (
+              <Message variant="success">
+                Pagado el{" "}
+                {new Intl.DateTimeFormat("es-ES").format(
+                  new Date(order.paidAt)
+                )}
+              </Message>
+            ) : (
+              <Message variant="danger">No pagado</Message>
+            )}
+          </div>
+          <div className="order__description__cart">
+            <h2>Tu compra: </h2>
+            {order.orderItems.map((item, index) => (
+              <div key={index} className="order__description__cart-items">
+                <Link to={`/product/${item.product}`}>
+                  {item.name} x {item.qty}
+                </Link>
+                <p>${item.qty * item.price}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="order__resume">
+          <h2>Resumen de compra</h2>
+
+          <div className="order__resume__item">
+            <p>Productos:</p>
+            <p>${order.itemsPrice}</p>
+          </div>
+          <div className="order__resume__item">
+            <p>Envío</p>
+            <p>${order.shippingPrice}</p>
+          </div>
+          <div className="order__resume__item">
+            <p>Descuento</p>
+            <p>- ${order.discountPrice}</p>
+          </div>
+          <div className="order__resume__item">
+            <p>Total</p>
+            <p>${order.totalPrice}</p>
+          </div>
+
+          <div className="order__resume__payment">
+            {!order.isPaid && order.paymentMethod === "PayPal" && (
+              <div>
+                {loadingPay && <Loader />}
+
+                {isPending ? (
+                  <Loader />
+                ) : (
+                  <div>
+                    <div>
+                      <PayPalButtons
+                        createOrder={createOrder}
+                        onApprove={onApprove}
+                        onError={onError}
+                      ></PayPalButtons>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {!order.isPaid &&
+              preferenceId &&
+              order.paymentMethod === "Mercadopago" && (
+                <div className="mp-button">
+                  {loadingMercadopago && <Loader />}
 
                   {isPending ? (
                     <Loader />
                   ) : (
-                    <div>
-                      <div>
-                        <PayPalButtons
-                          createOrder={createOrder}
-                          onApprove={onApprove}
-                          onError={onError}
-                        ></PayPalButtons>
-                      </div>
-                    </div>
+                    <Wallet
+                      initialization={{ preferenceId }}
+                      customization={{
+                        texts: {
+                          action: "comprar",
+                          valueProp: "detalles_seguridad",
+                        },
+                      }}
+                    />
                   )}
-                </ListGroupItem>
+                </div>
               )}
 
-              {!order.isPaid &&
-                preferenceId &&
-                order.paymentMethod === "Mercadopago" && (
-                  <ListGroupItem>
-                    {loadingMercadopago && <Loader />}
+            {!order.isPaid && order.paymentMethod === "Transferencia" && (
+              <Button>Generar pago</Button>
+            )}
 
-                    {isPending ? (
-                      <Loader />
-                    ) : (
-                      <Wallet
-                        initialization={{ preferenceId }}
-                        customization={{
-                          texts: {
-                            action: "comprar",
-                            valueProp: "detalles_seguridad",
-                          },
-                        }}
-                      />
-                    )}
-                  </ListGroupItem>
-                )}
-
-              {!order.isPaid && order.paymentMethod === "Transferencia" && (
-                <ListGroupItem>
-                  <div>
-                    <Button>Generar pago</Button>
-                  </div>
-                </ListGroupItem>
+            {loadingDeliver && <Loader />}
+            {userInfo &&
+              userInfo.isAdmin &&
+              order.isPaid &&
+              !order.isDelivered && (
+                <Button
+                  type="button"
+                  className="btn btn-block"
+                  onClick={deliverOrderHandler}
+                >
+                  Marcar como enviado
+                </Button>
               )}
-
-              {loadingDeliver && <Loader />}
-              {userInfo &&
-                userInfo.isAdmin &&
-                order.isPaid &&
-                !order.isDelivered && (
-                  <ListGroupItem>
-                    <Button
-                      type="button"
-                      className="btn btn-block"
-                      onClick={deliverOrderHandler}
-                    >
-                      Marcar como enviado
-                    </Button>
-                  </ListGroupItem>
-                )}
-            </ListGroup>
-          </Card>
-        </Col>
-      </Row>
+          </div>
+        </div>
+      </div>
     </>
   );
 };

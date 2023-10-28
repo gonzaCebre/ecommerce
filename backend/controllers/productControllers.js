@@ -6,7 +6,7 @@ import Product from "../models/productModel.js";
 //@access    Public
 const getProducts = asyncHandler(async (req, res) => {
   //asyncHandler es un middleware que coloca automaticamente el trycatch a las solicitudes de rutas
-  const pageSize = 12; //Numero de productos que se van a mostrar por pagina
+  const pageSize = process.env.PAGINATION_LIMIT; //Numero de productos que se van a mostrar por pagina
   const page = Number(req.query.pageNumber) || 1; //Numero de pagina que esta siendo pedido, si no existe es la pag 1
   
   const keyword = req.query.keyword ? {name: {$regex: req.query.keyword, $options: 'i'}} : {};
@@ -14,6 +14,24 @@ const getProducts = asyncHandler(async (req, res) => {
   const count = await Product.countDocuments({...keyword}); //Este es un metodo de mongoose que cuenta la cant de documentos
 
   const products = await Product.find({...keyword})
+    .limit(pageSize)
+    .skip(pageSize * (page - 1));
+  res.json({products, page, pages: Math.ceil(count / pageSize)}); //Devuelve un objeto con los productos, la pag solicitada y el numero de pags
+});
+
+//@description    Fetch all products
+//@route    GET /api/products
+//@access    Public
+const getProductsByCategory = asyncHandler(async (req, res) => {
+  const pageSize = 2; //Numero de productos que se van a mostrar por pagina
+  const page = Number(req.query.pageNumber) || 1; //Numero de pagina que esta siendo pedido, si no existe es la pag 1
+  
+  const category = req.query.category;
+  console.log(category)
+  
+  const count = await Product.countDocuments({category}); //Este es un metodo de mongoose que cuenta la cant de documentos
+
+  const products = await Product.find({category})
     .limit(pageSize)
     .skip(pageSize * (page - 1));
   res.json({products, page, pages: Math.ceil(count / pageSize)}); //Devuelve un objeto con los productos, la pag solicitada y el numero de pags
@@ -142,4 +160,4 @@ const getTopProducts = asyncHandler(async (req, res) => {
   res.status(200).json(products)
 });
 
-export { getProducts, getProductById, createProduct, updateProduct, deleteProduct, createProductReview,getTopProducts };
+export { getProducts, getProductsByCategory, getProductById, createProduct, updateProduct, deleteProduct, createProductReview,getTopProducts };

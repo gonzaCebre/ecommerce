@@ -39,8 +39,8 @@ const PlaceOrderScreen = () => {
         shippingAddress: cart.shippingAddress,
         paymentMethod: cart.paymentMethod,
         itemsPrice: cart.itemsPrice,
-        shippingPrice: cart.shippingPrice,
-        taxPrice: cart.taxPrice,
+        shippingPrice: cart.shippingAddress.shippingPrice,
+        discountPrice: cart.discountPrice,
         totalPrice: cart.totalPrice,
       }).unwrap();
       dispatch(clearCartItems());
@@ -53,112 +53,95 @@ const PlaceOrderScreen = () => {
   return (
     <>
       <CheckoutSteps step1 step2 step3 step4 />
-      <Row>
-        <Col md={8}>
-          <ListGroup variant="flush">
-            <ListGroupItem>
-              <h2>Envío</h2>
-              <p>
-                <strong>Dirección:</strong>
-                {cart.shippingAddress.address}, {cart.shippingAddress.city},{" "}
-                {cart.shippingAddress.postalCode},{" "}
-                {cart.shippingAddress.country}
-              </p>
-            </ListGroupItem>
-            <ListGroupItem>
-              <h2>Método de pago</h2>
-              <p>
-                <strong>Método:</strong>
-                {cart.paymentMethod}
-              </p>
-            </ListGroupItem>
-            <ListGroupItem>
-              <h2>Tu compra</h2>
-              {cart.cartItems.legth === 0 ? (
-                <Message>Tu carrito está vacío</Message>
-              ) : (
-                <ListGroup variant="flush">
-                  {cart.cartItems.map((item, index) => (
-                    <ListGroupItem key={index}>
-                      <Row>
-                        <Col md={1}>
-                          <Image
-                            src={item.image}
-                            alt={item.name}
-                            fluid
-                            rounded
-                          />
-                        </Col>
-                        <Col>
-                          <Link to={`/products/${item.product}`}>
-                            {item.name}
-                          </Link>
-                        </Col>
-                        <Col md={4}>
-                          {item.qty} x ${item.price} = ${item.qty * item.price}
-                        </Col>
-                      </Row>
-                    </ListGroupItem>
-                  ))}
-                </ListGroup>
-              )}
-              <p>
-                <strong>Método:</strong>
-                {cart.paymentMethod}
-              </p>
-            </ListGroupItem>
-          </ListGroup>
-        </Col>
-        <Col md={4}>
-          <Card>
-            <ListGroup variant="flush">
-              <ListGroupItem>
-                <h2>Resumen de compra</h2>
-              </ListGroupItem>
-              <ListGroupItem>
-                <Row>
-                  <Col>Productos:</Col>
-                  <Col>${cart.itemsPrice}</Col>
-                </Row>
-              </ListGroupItem>
-              <ListGroupItem>
-                <Row>
-                  <Col>Envío:</Col>
-                  <Col>${cart.shippingPrice}</Col>
-                </Row>
-              </ListGroupItem>
-              <ListGroupItem>
-                <Row>
-                  <Col>Recargo:</Col>
-                  <Col>${cart.taxPrice}</Col>
-                </Row>
-              </ListGroupItem>
-              <ListGroupItem>
-                <Row>
-                  <Col>Total:</Col>
-                  <Col>${cart.totalPrice}</Col>
-                </Row>
-              </ListGroupItem>
+      <div className="place-order-screen">
+        <div className="place-order-screen__items">
+          <div className="place-order-screen__items__item">
+            <h2>Tu compra</h2>
+            {cart.cartItems.legth === 0 ? (
+              <Message>Tu carrito está vacío</Message>
+            ) : (
+              <div className="place-order-screen__items__item__items-cart">
+                {cart.cartItems.map((item, index) => (
+                  <div
+                    key={index}
+                    className="place-order-screen__items__item__items-cart__item"
+                  >
+                    <div className="img-container">
+                      <img src={item.image} alt={item.name} />
+                    </div>
+                    <div className="place-order-screen__items__item__items-cart__item__description">
+                      <div className="place-order-screen__items__item__items-cart__item__description__link">
+                        <Link to={`/products/${item.product}`}>
+                          {item.name}
+                        </Link>
+                      </div>
+                      <p>
+                        {item.qty} x ${item.price} = ${item.qty * item.price}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
 
-              <ListGroupItem>
-                {error && <Message variant="danger">{error}</Message>}
-              </ListGroupItem>
+          <div className="place-order-screen__items__item">
+            <h2>Envío</h2>
+            <p>
+              <strong>Dirección: </strong>
+              {cart.shippingAddress.address}, {cart.shippingAddress.city},{" "}
+              {cart.shippingAddress.postalCode}, {cart.shippingAddress.country}
+            </p>
+          </div>
 
-              <ListGroupItem>
-                <Button
-                  type="button"
-                  className="btn-block"
-                  disabled={cart.cartItems.length === 0}
-                  onClick={placeOrderHandler}
-                >
-                  Ir a pagar
-                </Button>
-                {isLoading && <Loader />}
-              </ListGroupItem>
-            </ListGroup>
-          </Card>
-        </Col>
-      </Row>
+          <div className="place-order-screen__items__item">
+            <h2>Método de pago</h2>
+            <p>
+              <strong>Método: </strong>
+              {cart.paymentMethod}
+            </p>
+          </div>
+        </div>
+
+        <div className="place-order-screen__resume">
+          <h2>Resumen de compra</h2>
+
+          <div className="place-order-screen__resume__item">
+            <p>Productos: </p>
+            <p>${cart.itemsPrice}</p>
+          </div>
+
+          <div className="place-order-screen__resume__item">
+            <p>Envío: </p>
+            <p>${cart.shippingAddress.shippingPrice}</p>
+          </div>
+
+          <div className="place-order-screen__resume__item">
+            <p>Descuento: </p>
+            <p>- ${cart.discountPrice}</p>
+          </div>
+
+          <div className="place-order-screen__resume__item">
+            <p>Total: </p>
+            <p>${cart.totalPrice}</p>
+          </div>
+
+          <div className="place-order-screen__resume__item">
+            {error && <Message variant="danger">{error}</Message>}
+          </div>
+
+          <Button
+            type="button"
+            className="btn-block button--violet"
+            disabled={cart.cartItems.length === 0}
+            onClick={placeOrderHandler}
+          >
+            Ir a pagar
+          </Button>
+        </div>
+
+        {isLoading && <Loader />}
+      </div>
     </>
   );
 };

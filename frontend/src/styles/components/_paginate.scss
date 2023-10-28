@@ -1,0 +1,15 @@
+/* .pagination > li > a{
+    color: $green !important;
+} */
+
+.pagination .page-item .page-link{
+    background-color: rgba($color: #00B156, $alpha: 0.7);
+    color: white;
+}
+
+.pagination .page-item.active .page-link{
+    background-color: $green;
+    color: $violet;
+    font-weight: bold;
+    border: none;
+}

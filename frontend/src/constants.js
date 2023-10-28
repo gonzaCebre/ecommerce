@@ -8,3 +8,4 @@ export const PAYPAL_URL = "/api/config/paypal";
 export const MERCADOPAGO_URL_PUBLIC_KEY = "/api/config/mercadopago";
 export const MERCADOPAGO_URL = "/api/payment";
 export const UPLOADS_URL = "/api/upload";
+export const INSTAGRAM_URL = "/api/config/instagram";

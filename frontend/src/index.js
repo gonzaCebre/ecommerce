@@ -10,8 +10,8 @@ import {
 } from "react-router-dom";
 import {PayPalScriptProvider} from '@paypal/react-paypal-js'
 import {HelmetProvider} from 'react-helmet-async';
-import "./bootstrap.min.css";
-import "./index.css";
+import "./styles/bootstrap.min.css";
+import "./styles/style.scss";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import HomeScreen from "./screens/HomeScreen";
@@ -31,6 +31,7 @@ import ProductListScreen from "./screens/admin/ProductListScreen";
 import ProductEditScreen from "./screens/admin/ProductEditScreen";
 import UserListScreen from "./screens/admin/UserListScreen";
 import UserEditScreen from "./screens/admin/UserEditScreen";
+import ProductsScreen from "./screens/ProductsScreen";
 
 
 const router = createBrowserRouter(
@@ -38,9 +39,13 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App />}>
       <Route index={true} path='/' element={<HomeScreen />} />
-      <Route path='/search/:keyword' element={<HomeScreen />} />
-      <Route path='/page/:pageNumber' element={<HomeScreen />} />
-      <Route path='/search/:keyword/page/:pageNumber' element={<HomeScreen />} />
+      <Route path='/search/:keyword' element={<ProductsScreen />} />
+      <Route path='/category/:category' element={<ProductsScreen />} />
+      <Route path='/page/:pageNumber' element={<ProductsScreen />} />
+      <Route path='/category/:category/page/:pageNumber' element={<ProductsScreen />} />
+      <Route path='/search/:keyword/category/:category/page/:pageNumber' element={<ProductsScreen />} />
+      <Route path='/products' element={<ProductsScreen />} />
+      <Route path='/products/page/:pageNumber' element={<ProductsScreen />} />
       <Route path='/product/:id' element={<ProductScreen />} />
       <Route path='/cart' element={<CartScreen />} />
       <Route path='/login' element={<LoginScreen />} />
@@ -83,25 +88,3 @@ root.render(
 );
 
 reportWebVitals();
-
-/* import React from "react";
-import ReactDOM from "react-dom/client";
-import { Provider } from "react-redux";
-import store from "./store";
-import "./bootstrap.min.css";
-import "./index.css";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
-
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
-  <Provider store={store}>
-    <App />
-  </Provider>
-);
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
- */

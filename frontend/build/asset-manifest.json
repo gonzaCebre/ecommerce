@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/static/css/main.8895e7db.css",
+    "main.js": "/static/js/main.deaf5b89.js",
+    "static/js/787.cda612ba.chunk.js": "/static/js/787.cda612ba.chunk.js",
+    "static/media/foto-index.jpg": "/static/media/foto-index.998a2c492a547bb7dbe6.jpg",
+    "static/media/fumando.gif": "/static/media/fumando.7ab709e48009811d1e06.gif",
+    "static/media/envio.png": "/static/media/envio.edd5718ef1c5756de2f3.png",
+    "static/media/ovni-carrito.png": "/static/media/ovni-carrito.6e8eb96dec8e3ec16cbf.png",
+    "static/media/alien-billetera.svg": "/static/media/alien-billetera.7a39564084d65bbec7c1b91b594337c6.svg",
+    "index.html": "/index.html",
+    "static/media/header-icon.svg": "/static/media/header-icon.772ac55fd911ba133076.svg",
+    "main.8895e7db.css.map": "/static/css/main.8895e7db.css.map",
+    "main.deaf5b89.js.map": "/static/js/main.deaf5b89.js.map",
+    "787.cda612ba.chunk.js.map": "/static/js/787.cda612ba.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8895e7db.css",
+    "static/js/main.deaf5b89.js"
+  ]
+}

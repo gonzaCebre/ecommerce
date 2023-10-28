@@ -1,0 +1,238 @@
+header{
+    background-color: $green;
+    width: 100%;
+    border-bottom: 4px solid $black;
+
+    .navbar{
+
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+
+
+        &-toggler{
+            border: 3px solid black;
+            background-color: $violet;
+
+            &-icon{
+                background-image: url('../../media/header-icon.svg');
+            }
+        }
+
+        .logo{
+            color: black;
+            font-family: $secondary;
+        }
+
+        &__nav {
+            display: flex;
+            width: 100%;
+
+            &--nav{
+                display: flex;
+                flex-direction: row;
+                width: 100%;
+                justify-content: flex-end !important;
+
+                .navbar__user{
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: flex-end;
+                    font-family: $title;
+                    font-size: 1rem;  
+                    
+                    .navbar__cart{
+                        margin-right: 1rem;
+                        color: black;
+                        font-weight: 400;
+                    }
+
+                    &__login{
+                        color: black !important;
+
+                    }
+
+                    .dropdown {
+                        width: fit-content !important;
+
+                        a{
+                            color: black;
+                            margin-right: 0.8rem;
+                        }
+
+                        .dropdown-menu{
+                            background-color: $violet;
+                            width: 100%;
+                            /* width: fit-content; */
+                            min-width: 0 !important;
+    
+                            .dropdown-item{
+                                width: fit-content;
+                                margin: auto;
+                                font-family: $title;
+                                color: white;
+
+                                &:hover{
+                                    background-color: $green;
+                                    color: $violet;
+                                }
+                            }
+                        }
+                    }                   
+                }
+            }
+        }          
+    }
+}
+
+
+//CELU
+@media only screen and (max-width: 767px) {
+    header{
+        padding: 0.5rem 1.5rem;
+    
+        .navbar{    
+            &__nav {    
+                &--nav{
+                    .navbar__user{    
+                        .navbar__cart{
+                            margin-right: 1rem;
+                            color: black;
+                            font-weight: 400;
+    
+                            .ovni-carrito{
+                                width: 15px
+                            }
+                        }    
+                        .dropdown {    
+                            .dropdown-menu{
+                                max-width: 150px;
+        
+                                .dropdown-item{
+                                    padding-left: 10px;
+                                    padding-right: 10px;
+                                }
+                            }
+                        }                   
+                    }
+                }
+            }          
+        }
+    }
+}
+
+
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+    header{
+        padding: 0.5rem 3rem;
+
+        .navbar{    
+            .logo{
+                font-size: 1.8rem;
+            }
+            &__nav {    
+                &--nav{
+                    .navbar__user{    
+                        a{
+                            font-size: 1.3rem;
+                        }
+
+                        .navbar__cart{    
+                            margin-right: 1.5rem;
+                            .ovni-carrito{
+                                width: 20px
+                            }
+                        }    
+                        .dropdown {    
+                            .dropdown-menu{
+                                max-width: 150px;
+        
+                                .dropdown-item{
+                                    padding-left: 10px;
+                                    padding-right: 10px;
+                                }
+                            }
+                        }                   
+                    }
+                }
+            }          
+        }
+    }
+}
+
+@media only screen and (min-width: 993px) and (max-width: 1200px) {
+    header{
+        padding: 0.5rem 3rem;
+        
+        .navbar{    
+            .logo{
+                font-size: 1.8rem;
+            }
+            &__nav {    
+                &--nav{
+                    .navbar__user{    
+                        a{
+                            font-size: 1.3rem;
+                        }
+
+                        .navbar__cart{    
+                            margin-right: 1.5rem;
+                            .ovni-carrito{
+                                width: 25px
+                            }
+                        }    
+                        .dropdown {    
+                            .dropdown-menu{
+                                max-width: 150px;
+        
+                                .dropdown-item{
+                                    padding-left: 10px;
+                                    padding-right: 10px;
+                                }
+                            }
+                        }                   
+                    }
+                }
+            }          
+        }
+    }
+}
+
+@media only screen and (min-width: 1201px) {
+    header{
+        padding: 1rem 3rem;
+    
+        .navbar{    
+            .logo{
+                font-size: 2rem;
+            }
+            &__nav {    
+                &--nav{
+                    .navbar__user{    
+                        a{
+                            font-size: 1.3rem;
+                        }
+
+                        .navbar__cart{    
+                            margin-right: 1.5rem;
+                            .ovni-carrito{
+                                width: 25px
+                            }
+                        }    
+                        .dropdown {    
+                            .dropdown-menu{
+                                max-width: 150px;
+        
+                                .dropdown-item{
+                                    padding-left: 10px;
+                                    padding-right: 10px;
+                                }
+                            }
+                        }                   
+                    }
+                }
+            }          
+        }
+    }
+}
+

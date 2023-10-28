@@ -1,0 +1,252 @@
+footer{
+    background-color: $green;
+    border-top: 4px solid black;
+    border-bottom: 4px solid black;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    overflow-y: hidden;
+
+  
+    .footer__portada{
+      width: 100%;
+      display: flex;
+
+
+      &__texts{        
+        &__title{
+            font-weight: 100;
+            font-family: $secondary;
+            color: black;
+            margin: 0;
+            text-align: left;
+        }
+        &__subtitle{
+            font-weight: 100;
+            font-family: $secondary;
+            color: $violet;            
+            margin: 0;
+            text-align: left;
+        }
+    }
+    }
+  
+    .footer__redes{
+
+
+      p{
+        color: black;
+        text-align: left;
+        margin: 0;
+      }
+
+      .redes-container{   
+        display: flex;    
+        width: fit-content;  
+      
+        a{          
+          text-decoration: none;
+      
+          svg{
+            color: black;
+      
+            &:hover{
+              cursor: pointer;
+              color: $violet;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  //Solo para celu
+@media only screen and (max-width: 767px) {
+
+  footer{
+    padding-top: 1rem;
+
+    .footer__alien{
+      height: 10rem;
+      margin-bottom: -1rem;
+    }
+
+    .footer__portada{
+      width: 100%;
+      flex-direction: column;
+      align-items: flex-start;
+
+        &__texts{
+            &__title{
+                font-size: 1.2rem;
+            }
+            &__subtitle{
+                font-size: 1rem;
+                margin-top: -0.4rem;
+            }
+        }
+
+        .footer__redes{
+          width: 100%;
+          margin-top: 0.8rem;
+          p{
+            font-size: 1rem;
+          }
+    
+          .redes-container{     
+            justify-content: space-between;
+            a{          
+              margin-right: 0.3rem;
+              svg{
+                height: 1.2rem;
+              }
+            }
+          }
+        }
+    }
+
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+  footer{
+    padding-top: 1rem;
+
+    .footer__alien{
+      height: 13rem;
+    }
+
+    .footer__portada{
+      width: 100%;
+      flex-direction: column;
+      align-items: flex-start;
+        &__texts{
+            &__title{
+                font-size: 1.5rem;
+            }
+            &__subtitle{
+                font-size: 1.3rem;
+                margin-top: -0.4rem;
+            }
+        }
+
+        .footer__redes{
+          width: 100%;
+          margin-top: 1rem;
+
+          p{
+            font-size: 1.3rem;
+          }
+    
+          .redes-container{     
+            justify-content: space-between;
+
+            a{          
+              margin-right: 0.5rem;
+              svg{
+                height: 1.7rem;
+              }
+            }
+          }
+        }
+    }
+
+  }
+}
+
+@media only screen and (min-width: 993px) and (max-width: 1200px) {
+  footer{
+    padding-top: 1rem;
+
+    .footer__alien{
+      height: 13rem;
+    }
+
+    .footer__portada{
+      width: 80%;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding-right: 1rem;
+
+        &__texts{
+          width: 70%;
+            &__title{
+                font-size: 1.7rem;
+            }
+            &__subtitle{
+                font-size: 1.5rem;
+                margin-top: -0.4rem;
+            }
+        }
+
+        .footer__redes{
+          margin-top: 1rem;
+          width: 20%;
+
+          p{
+            font-size: 1.5rem;
+          }
+    
+          .redes-container{   
+            justify-content: space-between;
+            a{          
+              margin-right: 0.7rem;
+              svg{
+                height: 1.9rem;
+              }
+            }
+          }
+        }
+    }
+
+  }
+}
+
+@media only screen and (min-width: 1201px) {
+  footer{
+    padding-top: 1rem;
+
+    .footer__alien{
+      height: 13rem;
+    }
+
+    .footer__portada{
+      width: 80%;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding-right: 1rem;
+
+        &__texts{
+          width: 70%;
+            &__title{
+                font-size: 1.9rem;
+            }
+            &__subtitle{
+                font-size: 1.7rem;
+                margin-top: -0.4rem;
+            }
+        }
+
+        .footer__redes{
+          margin-top: 1rem;
+          width: 15%;
+
+          p{
+            font-size: 1.7rem;
+          }
+    
+          .redes-container{   
+            justify-content: space-between;
+            a{          
+              margin-right: 1rem;
+              svg{
+                height: 2rem;
+              }
+            }
+          }
+        }
+    }
+  }
+}

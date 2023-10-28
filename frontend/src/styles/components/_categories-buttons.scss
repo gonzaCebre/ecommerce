@@ -1,0 +1,65 @@
+.categories-buttons{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    a{
+        background-color: $violet;
+        color: white;
+        text-decoration: none;
+        border-radius: 10px;
+        margin-right: 0.2rem;
+
+        &:hover{
+            background-color: $green;
+            color: black;
+            cursor: pointer;
+        }
+    }
+}
+
+//CELU
+@media only screen and (max-width: 767px) {
+    .categories-buttons{
+        width: 70%;
+        a{
+            padding: 0.3rem 0.7rem;
+            margin-bottom: 0.2rem;
+        }
+    }
+}
+
+// TABLET
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+    .categories-buttons{
+        width: 60%;
+        a{
+            padding: 0.3rem 0.8rem;
+            margin: 0.2rem;
+        }
+    }
+}
+
+// COMPU
+@media only screen and (min-width: 993px) and (max-width: 1200px) {
+    .categories-buttons{
+        width: 60%;
+        a{
+            padding: 0.3rem 1rem;
+            margin: 0.3rem;
+            font-size: 1.1rem;
+        }
+    }
+}
+
+// XL
+@media only screen and (min-width: 1201px) {
+    .categories-buttons{
+        width: 60%;
+        a{
+            padding: 0.3rem 1rem;
+            margin: 0.3rem;
+            font-size: 1.2rem;
+        }
+    }
+}

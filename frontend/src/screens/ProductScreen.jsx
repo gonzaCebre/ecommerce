@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   Button,
@@ -59,7 +59,7 @@ const ProductScreen = () => {
         comment,
       }).unwrap();
       refetch();
-      toast.success("Review submitted");
+      toast.success("Review exitosa");
       setRating(0);
       setComment("");
     } catch (error) {
@@ -67,12 +67,51 @@ const ProductScreen = () => {
     }
   };
 
+  //Set postal code
+  const [provincia, setProvincia] = useState("Provincia...");
+  const [shippingPrice, setShippingPrice] = useState(0);
+
+  useEffect(() => {
+    if (
+      provincia === "Buenos Aires" ||
+      provincia === "Catamarca" ||
+      provincia === "Entre Ríos" ||
+      provincia === "La Pampa" ||
+      provincia === "La Rioja" ||
+      provincia === "Mendoza" ||
+      provincia === "San Juan" ||
+      provincia === "San Luis" ||
+      provincia === "Santa Fe" ||
+      provincia === "Santiago del Estero" ||
+      provincia === "Tucumán"
+    ) {
+      setShippingPrice(1731);
+    } else if (
+      provincia === "Chaco" ||
+      provincia === "Corrientes" ||
+      provincia === "Formosa" ||
+      provincia === "Jujuy" ||
+      provincia === "Neuquén" ||
+      provincia === "Río Negro" ||
+      provincia === "Salta"
+    ) {
+      setShippingPrice(1885);
+    } else if (
+      provincia === "Chubut" ||
+      provincia === "Misiones" ||
+      provincia === "Santa Cruz" ||
+      provincia === "Tierra del Fuego"
+    ) {
+      setShippingPrice(1900);
+    } else if (provincia === "Provincia...") {
+      setShippingPrice(0);
+    } else {
+      setShippingPrice(1445);
+    }
+  }, [provincia]);
+
   return (
     <>
-      <Link className="btn btn-dark my-3" to="/">
-        Volver
-      </Link>
-
       {isLoading ? (
         <Loader />
       ) : error ? (
@@ -82,143 +121,155 @@ const ProductScreen = () => {
       ) : (
         <>
           <Meta title={product.name} description={product.description} />
-          <Row>
-            <Col md={6}>
-              <Image src={product.image} alt={product.name} fluid />
-            </Col>
-            <Col md={3}>
-              <ListGroup variant="flush">
-                <ListGroupItem>
-                  <h3>{product.name}</h3>
-                </ListGroupItem>
-                <ListGroupItem>
-                  <Rating
-                    value={product.rating}
-                    text={`${product.numReviews} reviews`}
-                  />
-                </ListGroupItem>
-                <ListGroupItem>Price: ${product.price}</ListGroupItem>
-                <ListGroupItem>
-                  Description: ${product.description}
-                </ListGroupItem>
-              </ListGroup>
-            </Col>
-            <Col md={3}>
-              <Card>
-                <ListGroup variant="flush">
-                  <ListGroupItem>
-                    <Row>
-                      <Col>Price:</Col>
-                      <Col>
-                        <strong> ${product.price}</strong>
-                      </Col>
-                    </Row>
-                  </ListGroupItem>
-                  <ListGroupItem>
-                    <Row>
-                      <Col>Status:</Col>
-                      <Col>
-                        {product.countInStock > 0 ? "Disponible" : "Sin stock"}
-                      </Col>
-                    </Row>
-                  </ListGroupItem>
+          <Link className="button--violet volver" to="/">
+            Volver
+          </Link>
+          <div className="product-container">
+            <div className="product__img">
+              <img src={product.image} alt={product.name} />
+            </div>
+            <div className="product__description">
+              <h3>{product.name}</h3>
+              <p className="product__description__price">${product.price}</p>
+              {product.countInStock > 0 && (
+                <div className="product__description__addToCart">
+                  <Form.Select
+                    value={qty}
+                    onChange={(e) => setQty(Number(e.target.value))}
+                  >
+                    {[...Array(product.countInStock).keys()].map((x) => (
+                      <option key={x + 1} value={x + 1}>
+                        {x + 1}
+                      </option>
+                    ))}
+                  </Form.Select>
+                  <Button
+                    className="btn-block button--violet"
+                    type="button"
+                    disabled={product.countInStock === 0}
+                    onClick={addToCartHandler}
+                  >
+                    Agregar al carrito
+                  </Button>
+                </div>
+              )}
+              <p className="product-price">
+                {" "}
+                {product.price} x {qty} = ${(product.price * qty).toFixed(0)}
+              </p>
+            </div>
 
-                  {product.countInStock > 0 && (
-                    <ListGroupItem>
-                      <Row>
-                        <Col>Qty</Col>
-                        <Col>
-                          <Form.Control
-                            as="select"
-                            value={qty}
-                            onChange={(e) => setQty(Number(e.target.value))}
-                          >
-                            {[...Array(product.countInStock).keys()].map(
-                              (x) => (
-                                <option key={x + 1} value={x + 1}>
-                                  {x + 1}
-                                </option>
-                              )
-                            )}
-                          </Form.Control>
-                        </Col>
-                      </Row>
-                    </ListGroupItem>
-                  )}
-                  <ListGroupItem>
-                    <Button
-                      className="btn-block"
-                      type="button"
-                      disabled={product.countInStock === 0}
-                      onClick={addToCartHandler}
+            <div className="product__resume">
+              <p className="product__resume__description">
+                {product.description}
+              </p>
+              <div className="product__resume__shipping">
+                <p className="product__resume__shipping__title">
+                  Calcular envío
+                </p>
+
+                <div className="product__resume__shipping--shipping">
+                  <img src={require("../media/envio.png")} alt="" />
+                  <Form.Select
+                    value={provincia}
+                    onChange={(e) => setProvincia(e.target.value)}
+                  >
+                    <option>Provincia...</option>
+                    <option>Buenos Aires</option>
+                    <option>Catamarca</option>
+                    <option>Chaco</option>
+                    <option>Chubut</option>
+                    <option>Córdoba</option>
+                    <option>Corrientes</option>
+                    <option>Entre Ríos</option>
+                    <option>Formosa</option>
+                    <option>Jujuy</option>
+                    <option>La Pampa</option>
+                    <option>La Rioja</option>
+                    <option>Mendoza</option>
+                    <option>Misiones</option>
+                    <option>Neuquén</option>
+                    <option>Río Negro</option>
+                    <option>Salta</option>
+                    <option>San Juan</option>
+                    <option>San Luis</option>
+                    <option>Santa Cruz</option>
+                    <option>Santa Fe</option>
+                    <option>Santiago del Estero</option>
+                    <option>Tierra del Fuego</option>
+                    <option>Tucumán</option>
+                  </Form.Select>
+                </div>
+              </div>
+              <p> Costo del envío: ${shippingPrice}</p>
+            </div>
+          </div>
+
+          {/*           <div className="review">
+            <h2>Reviews</h2>
+            <Rating
+              value={product.rating}
+              text={`${product.numReviews} reviews`}
+              color={"#00B156"}
+            />
+            {product.reviews.length === 0 && (
+              <Message>Aún no hay reviews</Message>
+            )}
+            <div>
+              {product.reviews.map((review) => (
+                <div key={review._id}>
+                  <strong>{review.name}</strong>
+                  <Rating value={review.rating} />
+                  <p>{review.createdAt.substring(0, 10)}</p>
+                  <p>{review.comment}</p>
+                </div>
+              ))}
+
+              <h2>Escribí una review</h2>
+              {loadingProductReview && <Loader />}
+
+              {userInfo ? (
+                <Form onSubmit={submitHandler}>
+                  <Form.Group controlId="rating" className="my-2">
+                    <Form.Label>Rating</Form.Label>
+                    <Form.Control
+                      as="select"
+                      value={rating}
+                      onChange={(e) => setRating(Number(e.target.value))}
                     >
-                      Agregar al carrito
+                      <option value="">Select...</option>
+                      <option value="1">1 - Malo</option>
+                      <option value="2">2 - Zafa</option>
+                      <option value="3">3 - Piola</option>
+                      <option value="4">4 - Muy piola</option>
+                      <option value="5">5 - Excelente</option>
+                    </Form.Control>
+                    <Form.Group controlId="comment" className="my-2">
+                      <Form.Label>Comentario</Form.Label>
+                      <Form.Control
+                        as="textarea"
+                        row="3"
+                        value={comment}
+                        onChange={(e) => setComment(e.target.value)}
+                      ></Form.Control>
+                    </Form.Group>
+                    <Button
+                      disabled={loadingProductReview}
+                      type="submit"
+                      variant="primary"
+                      className="button--violet"
+                    >
+                      Enviar
                     </Button>
-                  </ListGroupItem>
-                </ListGroup>
-              </Card>
-            </Col>
-          </Row>
-          <Row className="review">
-            <Col md={6}>
-              <h2>Reviews</h2>
-              {product.reviews.length === 0 && <Message>No Reviews</Message>}
-              <ListGroup variant="flush">
-                {product.reviews.map((review) => (
-                  <ListGroupItem key={review._id}>
-                    <strong>{review.name}</strong>
-                    <Rating value={review.rating} />
-                    <p>{review.createdAt.substring(0, 10)}</p>
-                    <p>{review.comment}</p>
-                  </ListGroupItem>
-                ))}
-                <ListGroupItem>
-                  <h2>Write a customer review</h2>
-                  {loadingProductReview && <Loader />}
-
-                  {userInfo ? (
-                    <Form onSubmit={submitHandler}>
-                      <Form.Group controlId="rating" className="my-2">
-                        <Form.Label>Rating</Form.Label>
-                        <Form.Control
-                          as="select"
-                          value={rating}
-                          onChange={(e) => setRating(Number(e.target.value))}
-                        >
-                          <option value="">Select...</option>
-                          <option value="1">1 - Poor</option>
-                          <option value="2">2 - Fair</option>
-                          <option value="3">3 - Good</option>
-                          <option value="4">4 - Very good</option>
-                          <option value="5">5 - Excellent</option>
-                        </Form.Control>
-                        <Form.Group controlId="comment" className="my-2">
-                          <Form.Label>Comment</Form.Label>
-                          <Form.Control
-                            as="textarea"
-                            row="3"
-                            value={comment}
-                            onChange={(e) => setComment(e.target.value)}
-                          ></Form.Control>
-                        </Form.Group>
-                        <Button
-                          disabled={loadingProductReview}
-                          type="submit"
-                          variant="primary"
-                        >
-                          Submit
-                        </Button>
-                      </Form.Group>
-                    </Form>
-                  ) : (
-                    <Message>
-                      Please <Link to="/login">sign in</Link> to write a review{" "}
-                    </Message>
-                  )}
-                </ListGroupItem>
-              </ListGroup>
-            </Col>
-          </Row>
+                  </Form.Group>
+                </Form>
+              ) : (
+                <Message>
+                  <Link to="/login">Logueate</Link> para dejar una review{" "}
+                </Message>
+              )}
+            </div>
+          </div> */}
         </>
       )}
     </>

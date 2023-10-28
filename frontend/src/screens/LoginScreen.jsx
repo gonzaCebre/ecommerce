@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Form, Button, Row, Col } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import FormContainer from "../components/FormContainer";
 import Loader from "../components/Loader";
 import { useLoginMutation } from "../slices/usersApiSlice";
 import { setCredentials } from "../slices/authSlice";
@@ -42,48 +41,46 @@ const LoginScreen = () => {
   };
 
   return (
-    <FormContainer>
-      <h1>Sign In</h1>
+    <div className="login">
+      <h1>Entrar</h1>
 
       <Form onSubmit={submitHandler}>
-        <Form.Group controlId='email' className='my-3'>
-          <Form.Label>Email Address</Form.Label>
+        <Form.Group controlId="email" className="my-3">
+          <Form.Label>Email</Form.Label>
           <Form.Control
-            type='email'
-            placeholder='Enter email'
+            type="email"
+            placeholder="Ingresa tu mail"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           ></Form.Control>
         </Form.Group>
-        <Form.Group controlId='password' className='my-3'>
-          <Form.Label>Password</Form.Label>
+        <Form.Group controlId="password" className="my-3">
+          <Form.Label>Contraseña</Form.Label>
           <Form.Control
-            type='password'
-            placeholder='Enter password'
+            type="password"
+            placeholder="Ingresa tu contraseña..."
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           ></Form.Control>
         </Form.Group>
         <Button
-          type='submit'
-          variant='primary'
-          className='mt-2'
+          type="submit"
+          variant="primary"
+          className="button--violet"
           disabled={isLoading}
         >
-          Sign In
+          Entrar
         </Button>
 
         {isLoading && <Loader />}
       </Form>
-      <Row className='py-3'>
-        <Col>
-          New Customer?
-          <Link to={redirect ? `/register?redirect=${redirect}` : "/register"}>
-            Register
-          </Link>
-        </Col>
-      </Row>
-    </FormContainer>
+      <div className="login--change">
+        <p>Comprás por primera vez?</p>
+        <Link to={redirect ? `/register?redirect=${redirect}` : "/register"}>
+          Registrate
+        </Link>
+      </div>
+    </div>
   );
 };
 

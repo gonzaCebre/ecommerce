@@ -54,16 +54,16 @@ const ProfileScreen = () => {
   };
 
   return (
-    <Row>
-      <Col md={3}>
-        <h2>User Profile</h2>
+    <div className="user-profile">
+      <div className="user-profile__profile">
+        <h2>Actualizar Perfil</h2>
 
-        <Form onSubmit={submitHandler}>
+        <Form onSubmit={submitHandler} className="user-profile__profile__form">
           <Form.Group controlId="name" className="my-2">
-            <Form.Label>Name</Form.Label>
+            <Form.Label>Nombre</Form.Label>
             <Form.Control
               type="name"
-              placeholder="Enter name"
+              placeholder="Ingresa tu nombre..."
               value={name}
               onChange={(e) => setName(e.target.value)}
             ></Form.Control>
@@ -72,39 +72,39 @@ const ProfileScreen = () => {
             <Form.Label>Email</Form.Label>
             <Form.Control
               type="email"
-              placeholder="Enter Email"
+              placeholder="Ingresa tu email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             ></Form.Control>
           </Form.Group>
           <Form.Group controlId="password" className="my-2">
-            <Form.Label>Password</Form.Label>
+            <Form.Label>Contraseña</Form.Label>
             <Form.Control
               type="password"
-              placeholder="Enter Password"
+              placeholder="Ingresa tu contraseña"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             ></Form.Control>
           </Form.Group>
           <Form.Group controlId="confirmPassword" className="my-2">
-            <Form.Label>Password</Form.Label>
+            <Form.Label>Contraseña</Form.Label>
             <Form.Control
               type="password"
-              placeholder="Confirm Password"
+              placeholder="Repetí tu contraseña"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             ></Form.Control>
           </Form.Group>
 
-          <Button type="submit" variant="primary" className="my-2">
-            Update
-          </Button>
+          <button type="submit" className="button--green">
+            Actualizar datos
+          </button>
 
           {}
         </Form>
-      </Col>
-      <Col md={9}>
-        <h2>My Orders</h2>
+      </div>
+      <div className="user-profile__compras">
+        <h2>Mis compras</h2>
         {isLoading ? (
           <Loader />
         ) : error ? (
@@ -115,18 +115,30 @@ const ProfileScreen = () => {
           <Table striped hover responsive className="table-sm">
             <thead>
               <tr>
-                <th>ID</th>
-                <th>DATE</th>
+                {window.innerWidth > 992 ? (
+                  <th>ID</th>
+                ) : (
+                  console.log(
+                    "amplia la pantalla para ver el id de la compra y detalles"
+                  )
+                )}
+                <th>FECHA</th>
                 <th>TOTAL</th>
-                <th>PAID</th>
-                <th>DELIVERED</th>
+                <th>PAGO</th>
+                <th>ENVÍO</th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
               {orders.map((order) => (
                 <tr key={order._id}>
-                  <td>{order._id}</td>
+                  {window.innerWidth > 992 ? (
+                    <td>{order._id}</td>
+                  ) : (
+                    console.log(
+                      "amplia la pantalla para ver el id de la compra y detalles"
+                    )
+                  )}
                   <td>{order.createdAt.substring(0, 10)}</td>
                   <td>${order.totalPrice}</td>
                   <td>
@@ -143,20 +155,26 @@ const ProfileScreen = () => {
                       <FaTimes style={{ color: "red" }} />
                     )}
                   </td>
-                  <td>
-                    <LinkContainer to={`/order/${order._id}`}>
-                      <Button className="btn-sm" variant="light">
-                        Details
-                      </Button>
-                    </LinkContainer>
-                  </td>
+                  {window.innerWidth > 992 ? (
+                    <td>
+                      <LinkContainer to={`/order/${order._id}`}>
+                        <button className="button--green" variant="light">
+                          Detalles
+                        </button>
+                      </LinkContainer>
+                    </td>
+                  ) : (
+                    console.log(
+                      "amplia la pantalla para ver el id de la compra y detalles"
+                    )
+                  )}
                 </tr>
               ))}
             </tbody>
           </Table>
         )}
-      </Col>
-    </Row>
+      </div>
+    </div>
   );
 };
 
