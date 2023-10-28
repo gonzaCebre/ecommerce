@@ -127,7 +127,7 @@ const PlaceOrderScreen = () => {
           </div>
 
           <div className="place-order-screen__resume__item">
-            {error && <Message variant="danger">{error}</Message>}
+            {error && <Message variant="danger">{error.data.message}</Message>}
           </div>
 
           <Button

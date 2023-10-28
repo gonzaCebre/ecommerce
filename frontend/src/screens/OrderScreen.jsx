@@ -1,14 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import {
-  Row,
-  Col,
-  ListGroup,
-  Image,
-  Button,
-  Card,
-  ListGroupItem,
-} from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
@@ -233,7 +225,7 @@ const OrderScreen = () => {
   return isLoading ? (
     <Loader />
   ) : isError ? (
-    <Message variant="danger" />
+    <Message variant="danger">{isError?.data?.message}</Message>
   ) : (
     <>
       <h1>Finalizar compra</h1>
