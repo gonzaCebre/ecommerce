@@ -18,13 +18,13 @@ connectDB(); //Conecta con la base de datos
 
 const app = express(); //Inicializa express
 
-/* app.use(cors(
+app.use(cors(
   {
     origin: ['https://staychill-ecommerce-frontend.vercel.app'],
     methods: ["POST", "GET"],
     credentials: true
   }
-)); */
+));
 
 
 
@@ -32,7 +32,7 @@ const app = express(); //Inicializa express
 app.use(express.json()); //Para que pueda recibir JSONS en el body
 app.use(express.urlencoded({ extended: true }));
 
-app.use(cors())
+/* app.use(cors()) */
 
 //Cookie parser middleware
 app.use(cookieParser()); //Nos permite acceder a las cookies
