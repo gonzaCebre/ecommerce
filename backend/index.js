@@ -18,13 +18,7 @@ connectDB(); //Conecta con la base de datos
 
 const app = express(); //Inicializa express
 
-app.use(cors(
-  {
-    origin: ['https://staychill-ecommerce-frontend.vercel.app'],
-    methods: ["POST", "GET"],
-    credentials: true
-  }
-));
+app.use(cors();
 
 
 
@@ -61,7 +55,7 @@ app.use(errorHandler);
 const PORT = process.env.PORT || 5000;
 
 
-/* //Preparando para produccion
+//Preparando para produccion
 if(process.env.NODE_ENV === 'production'){
   //Seteando la carpeta estatica
   app.use(express.static(path.join(__dirname, '/frontend/build')));
@@ -77,15 +71,15 @@ if(process.env.NODE_ENV === 'production'){
       `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold
     )
   );
-} */
+}
 
 
 
 
-
+/*
 app.listen(
   PORT,
   console.log(
     `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold
   )
-);
+);*/
