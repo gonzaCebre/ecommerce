@@ -20,7 +20,7 @@ const app = express(); //Inicializa express
 
 app.use(cors(
   {
-    origin: ['https://staychill-ecommerce-frontend.vercel.app/'],
+    origin: ['https://staychill-ecommerce-frontend.vercel.app'],
     methods: ["POST", "GET"],
     credentials: true
   }
