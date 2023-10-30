@@ -18,19 +18,21 @@ connectDB(); //Conecta con la base de datos
 
 const app = express(); //Inicializa express
 
-app.use(cors(
+/* app.use(cors(
   {
     origin: ['https://staychill-ecommerce-frontend.vercel.app'],
     methods: ["POST", "GET"],
     credentials: true
   }
-));
+)); */
+
+
 
 //Body parser middleware
 app.use(express.json()); //Para que pueda recibir JSONS en el body
 app.use(express.urlencoded({ extended: true }));
 
-
+app.use(cors())
 
 //Cookie parser middleware
 app.use(cookieParser()); //Nos permite acceder a las cookies
@@ -52,6 +54,13 @@ app.get('/api/config/instagram', (req, res) => res.send({igToken: process.env.IG
 const __dirname = path.resolve(); //Setea __dirname al directorio actual
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 
+//Middlewares
+app.use(notFound);
+app.use(errorHandler);
+
+const PORT = process.env.PORT || 5000;
+
+
 //Preparando para produccion
 if(process.env.NODE_ENV === 'production'){
   //Seteando la carpeta estatica
@@ -62,22 +71,24 @@ if(process.env.NODE_ENV === 'production'){
     res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
   });
 } else {
-  app.get("/", (req, res) => {
+/*   app.get("/", (req, res) => {
     res.send("API is running");
-  });
+  }); */
+  app.listen(
+    PORT,
+    console.log(
+      `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold
+    )
+  );
 }
 
 
 
-//Middlewares
-app.use(notFound);
-app.use(errorHandler);
 
-const PORT = process.env.PORT || 5000;
 
-app.listen(
+/* app.listen(
   PORT,
   console.log(
     `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold
   )
-);
+); */
