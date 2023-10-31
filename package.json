@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Ecommerce",
   "main": "index.js",
-  "type": "commonjs",
   "scripts": {
     "start": "node backend/index",
     "server": "nodemon backend/index",
