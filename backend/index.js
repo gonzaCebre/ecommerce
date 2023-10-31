@@ -18,13 +18,7 @@ connectDB(); //Conecta con la base de datos
 
 const app = express(); //Inicializa express
 
-app.use(cors(
-  {
-    origin: ['https://staychill-ecommerce-frontend.vercel.app'],
-    methods: ["POST", "GET"],
-    credentials: true
-  }
-));
+app.use(cors());
 
 
 
