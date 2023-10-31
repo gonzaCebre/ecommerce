@@ -8,7 +8,7 @@ import { BASE_URL } from "./constants";
 const App = () => {
 
   console.log(BASE_URL)
-  
+
   return (
     <>
       <Header />
