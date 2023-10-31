@@ -4,12 +4,25 @@ import { MERCADOPAGO_URL, MERCADOPAGO_URL_PUBLIC_KEY, ORDERS_URL, PAYPAL_URL } f
 export const ordersApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         createOrder: builder.mutation({
+            query: (order, { getState }) => {
+              const token = getState().auth.token; // Obtén el token del estado de autenticación
+              return {
+                url: ORDERS_URL,
+                method: 'POST',
+                body: { ...order },
+                headers: {
+                  Authorization: `Bearer ${token}`, // Incluye el token en el encabezado de autorización
+                },
+              };
+            },
+        }),
+/*         createOrder: builder.mutation({
             query: (order) => ({
                 url: ORDERS_URL,
                 method: 'POST',
                 body: {...order}
             })
-        }),
+        }), */
         getOrderDetails: builder.query({
             query: (orderId) => ({
                 url: `${ORDERS_URL}/${orderId}`
