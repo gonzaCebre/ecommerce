@@ -25,6 +25,7 @@ const authUser = asyncHandler(async (req, res) => {
       secure: true,
       sameSite: "none",
       maxAge: 30 * 24 * 60 * 60 * 1000, // 30 dias
+      domain: ".vercel.app"
     });
 
 /*     // Para desarrollo
