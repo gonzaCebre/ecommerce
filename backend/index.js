@@ -22,7 +22,7 @@ const app = express(); //Inicializa express
 app.use(cookieParser()); //Nos permite acceder a las cookies
 
 const corsOptions = {
-  origin: "http://localhost:3000", // Reemplaza con el origen exacto de tu cliente
+  origin: "https://frontend-delta-rouge-29.vercel.app/", // Reemplaza con el origen exacto de tu cliente
   credentials: true, // Habilita las solicitudes con credenciales
 };
 
