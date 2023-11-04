@@ -9,6 +9,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         // eslint-disable-next-line no-undef
         url: `${USERS_URL}/auth`, //'api/users'
         method: "POST",
+        credentials: "include",
         body: data,
       }),
     }),

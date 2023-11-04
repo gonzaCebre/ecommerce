@@ -34,6 +34,17 @@ const LoginScreen = () => {
     try {
       const res = await login({ email, password }).unwrap();
       dispatch(setCredentials({ ...res })); //dispara setCredential con la info que proviene del form y setCredential aloja la data en el localstorage
+
+      // Acceder al token JWT de las cookies
+      const jwtCookie = document.cookie
+        .split("; ")
+        .find((row) => row.startsWith("jwt="));
+      const jwtToken = jwtCookie ? jwtCookie.split("=")[1] : null;
+
+      console.log("Token JWT:", jwtToken); // Muestra el token JWT en la consola
+
+      console.log("Respuesta: ", res);
+
       navigate(redirect);
     } catch (err) {
       toast.error(err?.data?.message || err.error);

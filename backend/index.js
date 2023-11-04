@@ -18,7 +18,17 @@ connectDB(); //Conecta con la base de datos
 
 const app = express(); //Inicializa express
 
-app.use(cors());
+//Cookie parser middleware
+app.use(cookieParser()); //Nos permite acceder a las cookies
+
+const corsOptions = {
+  origin: "http://localhost:3000", // Reemplaza con el origen exacto de tu cliente
+  credentials: true, // Habilita las solicitudes con credenciales
+};
+
+app.use(cors(corsOptions));
+
+/* app.use(cors()) */
 
 
 //Body parser middleware
@@ -26,8 +36,7 @@ app.use(express.json()); //Para que pueda recibir JSONS en el body
 app.use(express.urlencoded({ extended: true }));
 
 
-//Cookie parser middleware
-app.use(cookieParser()); //Nos permite acceder a las cookies
+
 
 app.use("/api/products", productRoutes); //Todo lo que vaya a '/api/products' lo va a procesar productRoutes
 app.use("/api/users", userRoutes); //Todo lo que vaya a '/api/users' lo va a procesar productRoutes
