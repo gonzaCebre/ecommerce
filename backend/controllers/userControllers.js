@@ -26,8 +26,6 @@ const authUser = asyncHandler(async (req, res) => {
       sameSite: "None",
       maxAge: 30 * 24 * 60 * 60 * 1000, // 30 dias
       domain: "vercel.app"
-    });
-      domain: "frontend-delta-rouge-29.vercel.app"
     }); */
 
 /*     // Para desarrollo
