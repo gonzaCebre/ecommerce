@@ -22,16 +22,16 @@ const app = express(); //Inicializa express
 app.use(cookieParser()); //Nos permite acceder a las cookies
 
 //Para desarrollo
-/* const corsOptions = {
+const corsOptions = {
   origin: "http://localhost:3000", // Reemplaza con el origen exacto de tu cliente
   credentials: true, // Habilita las solicitudes con credenciales
-}; */
-
+};
+/* 
 //Para produccion
 const corsOptions = {
   origin: "https://frontend-delta-rouge-29.vercel.app", // Reemplaza con el origen exacto de tu cliente
   credentials: true, // Habilita las solicitudes con credenciales
-};
+}; */
 
 
 app.use(cors(corsOptions));

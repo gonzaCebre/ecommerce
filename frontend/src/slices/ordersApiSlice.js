@@ -4,27 +4,59 @@ import { MERCADOPAGO_URL, MERCADOPAGO_URL_PUBLIC_KEY, ORDERS_URL, PAYPAL_URL } f
 export const ordersApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         createOrder: builder.mutation({
+            query: (order) => {
+            //Obtengo el token desde localstorage
+            const token = localStorage.getItem('token');
+            console.log('Token obtenido desde Create Order: ' + token)
+
+                return {
+                    url: ORDERS_URL,
+                    method: 'POST',
+                    body: {...order},
+                    credentials: 'include',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    },
+                }
+            }
+        }),
+/*         createOrder: builder.mutation({
             query: (order) => ({
                 url: ORDERS_URL,
                 method: 'POST',
                 body: {...order},
                 credentials: 'include',
             })
-        }),
+        }), */
         getOrderDetails: builder.query({
-            query: (orderId) => ({
-                url: `${ORDERS_URL}/${orderId}`,
-                credentials: 'include',
-            }),
+            query: (orderId) => {
+                //Obtengo el token desde localstorage
+                const token = localStorage.getItem('token');
+
+                return {
+                    url: `${ORDERS_URL}/${orderId}`,
+                    credentials: 'include',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    },
+                }
+            },
             keepUnusedDataFor: 5,
         }),
         payOrder: builder.mutation({
-            query: ({orderId, details}) => ({
-                url: `${ORDERS_URL}/${orderId}/pay`,
-                method: 'PUT',
-                body: {...details},
-                credentials: 'include',
-            })
+            query: ({orderId, details}) => {
+                //Obtengo el token desde localstorage
+                const token = localStorage.getItem('token');
+                return{
+                    url: `${ORDERS_URL}/${orderId}/pay`,
+                    method: 'PUT',
+                    body: {...details},
+                    credentials: 'include',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    },
+                }
+            }
         }),
         getPayPalClientId: builder.query({
             query: () => ({
@@ -39,10 +71,18 @@ export const ordersApiSlice = apiSlice.injectEndpoints({
             keepUnusedDataFor: 5,
         }),
         getMyOrders: builder.query({
-            query: () => ({
-                url: `${ORDERS_URL}/mine`,
-                credentials: 'include',
-            }),
+            query: () => {
+                //Obtengo el token desde localstorage
+                const token = localStorage.getItem('token');
+
+                return{
+                    url: `${ORDERS_URL}/mine`,
+                    credentials: 'include',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    },
+                }
+            },
             keepUnusedDataFor: 5,
         }),
         getOrders: builder.query({

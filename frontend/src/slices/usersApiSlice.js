@@ -18,7 +18,8 @@ export const usersApiSlice = apiSlice.injectEndpoints({
       query: (data) => ({
         // eslint-disable-next-line no-undef
         url: `${USERS_URL}`, //'api/users'
-        method: "POST",
+        method: "POST",                
+        credentials: "include",
         body: data,
       }),
     }),
@@ -34,7 +35,8 @@ export const usersApiSlice = apiSlice.injectEndpoints({
       query: (data) => ({
         // eslint-disable-next-line no-undef
         url: `${USERS_URL}/profile`,
-        method: "PUT",
+        method: "PUT",        
+        credentials: "include",
         body: data,
       }),
     }),

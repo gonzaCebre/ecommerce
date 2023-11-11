@@ -25,6 +25,9 @@ const PlaceOrderScreen = () => {
   }, [cart.paymentMethod, cart.shippingAddress.address, navigate]);
 
   const placeOrderHandler = async () => {
+    const token = localStorage.getItem("token");
+    console.log("Token:", token);
+
     try {
       const res = await createOrder({
         orderItems: cart.cartItems,
@@ -49,7 +52,7 @@ const PlaceOrderScreen = () => {
         <div className="place-order-screen__items">
           <div className="place-order-screen__items__item">
             <h2>Tu compra</h2>
-            {cart.cartItems.legth === 0 ? (
+            {cart.cartItems.length === 0 ? (
               <Message>Tu carrito está vacío</Message>
             ) : (
               <div className="place-order-screen__items__item__items-cart">

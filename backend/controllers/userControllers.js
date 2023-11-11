@@ -17,16 +17,16 @@ const authUser = asyncHandler(async (req, res) => {
       expiresIn: "30d",
     });
   
-    console.log(token)
+    console.log('El token despues del auth es: ' + token)
   
-    // Set JWT as HTTP-only cookie
+/*     // Set JWT as HTTP-only cookie
     res.cookie("jwt", token, {
       httpOnly: true,
       secure: true,
       sameSite: "none",
       maxAge: 30 * 24 * 60 * 60 * 1000, // 30 dias
       domain: "frontend-delta-rouge-29.vercel.app"
-    });
+    }); */
 
 /*     // Para desarrollo
     res.cookie("jwt", token, {
@@ -43,6 +43,7 @@ const authUser = asyncHandler(async (req, res) => {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
+      token
     });
   } else {
     res.status(401); // Error 'no autorizado'
@@ -70,13 +71,20 @@ const registerUser = asyncHandler(async (req, res) => {
   });
 
   if (user) {
-    generateToken(res, user._id);
+    /* generateToken(res, user._id); */
+
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "30d",
+    });
+  
+    console.log(token)
 
     res.status(201).json({
       _id: user._id,
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
+      token
     });
   } else {
     res.status(400);
@@ -89,10 +97,10 @@ const registerUser = asyncHandler(async (req, res) => {
 //@access    Private
 const logoutUser = asyncHandler(async (req, res) => {
   //Limpia el token de las cookies
-  res.cookie("jwt", "", {
+/*   res.cookie("jwt", "", {
     httpOnly: true,
     expires: new Date(0),
-  });
+  }); */
 
   res.status(200).json({ message: "Log out succesfully" });
 });

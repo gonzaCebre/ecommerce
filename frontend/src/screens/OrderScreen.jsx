@@ -133,6 +133,8 @@ const OrderScreen = () => {
       //Se debe crear la preferencia para que se genere el boton de mp
       const createPreference = async () => {
         try {
+          const token = localStorage.getItem("token");
+
           const response = await axios.post(
             `${MERCADOPAGO_URL}/create-order`, //Manda la preferencia a la ruta creada en el back
             {
@@ -141,6 +143,11 @@ const OrderScreen = () => {
               quantity: 1,
               currency_id: "ARS",
               orderId, //Cambiar
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`, // Incluye el token en los headers
+              },
             }
           );
 
