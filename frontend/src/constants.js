@@ -5,8 +5,16 @@ export const BASE_URL = process.env.REACT_APP_API_URL; //Para produccion
 export const PRODUCTS_URL = "/api/products";
 export const USERS_URL = "/api/users";
 export const ORDERS_URL = "/api/orders";
-export const PAYPAL_URL = "/api/config/paypal";
+export const UPLOADS_URL = "/api/upload";
+
+//Para produccion
+export const PAYPAL_URL = "https://staychill-ecommerce-api.vercel.app/api/config/paypal";
+export const MERCADOPAGO_URL_PUBLIC_KEY = "https://staychill-ecommerce-api.vercel.app/api/config/mercadopago";
+export const MERCADOPAGO_URL = "https://staychill-ecommerce-api.vercel.app/api/payment";
+export const INSTAGRAM_URL = "https://staychill-ecommerce-api.vercel.app/api/config/instagram";
+
+//Para desarrollo
+/* export const PAYPAL_URL = "/api/config/paypal";
 export const MERCADOPAGO_URL_PUBLIC_KEY = "/api/config/mercadopago";
 export const MERCADOPAGO_URL = "/api/payment";
-export const UPLOADS_URL = "/api/upload";
-export const INSTAGRAM_URL = "/api/config/instagram";
+export const INSTAGRAM_URL = "/api/config/instagram"; */
