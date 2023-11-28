@@ -34,12 +34,29 @@ export const productsApiSlice = apiSlice.injectEndpoints({
       keepUnusedDataFor: 5,
     }),
     createProduct: builder.mutation({
+      query: () => {
+        const token = localStorage.getItem('token');
+        console.log(token)
+
+        return{
+          url: PRODUCTS_URL,
+          method: 'POST',
+          credentials: 'include',
+          headers: {
+              'Authorization': `Bearer ${token}`,
+          },
+        }
+
+      },
+      invalidatesTags: ['Product'] //Frena el cacheo para tener la data fresca
+    }),
+/*     createProduct: builder.mutation({
       query: () => ({
         url: PRODUCTS_URL,
         method: 'POST',
       }),
       invalidatesTags: ['Product'] //Frena el cacheo para tener la data fresca
-    }),
+    }), */
     updateProduct: builder.mutation({
       query: (data) => {
         const token = localStorage.getItem('token');
