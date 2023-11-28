@@ -39,6 +39,7 @@ const ProductListScreen = () => {
   const createProductHandler = async () => {
     if (window.confirm("Are you sure you want to create a new product?")) {
       try {
+        console.log("entro a try");
         await createProduct();
         refetch();
       } catch (error) {
