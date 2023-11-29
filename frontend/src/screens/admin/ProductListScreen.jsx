@@ -39,11 +39,11 @@ const ProductListScreen = () => {
   const createProductHandler = async () => {
     try {
       console.log("entro a try");
-      await createProduct();
-      refetch();
+      /* await createProduct();
+      refetch(); */
     } catch (error) {
       console.log("entro a catch");
-      toast.error(error?.data?.message || error.error);
+      /* toast.error(error?.data?.message || error.error); */
     }
     /*     if (window.confirm("Are you sure you want to create a new product?")) {
       try {
@@ -60,7 +60,7 @@ const ProductListScreen = () => {
     <>
       <h1>Products</h1>
       <button className="button--violet" onClick={createProductHandler}>
-        <FaEdit /> Create Product
+        <FaEdit /> Create Product - hola
       </button>
       {loadingCreate && <Loader />}
       {loadingDelete && <Loader />}
