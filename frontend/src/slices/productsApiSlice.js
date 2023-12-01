@@ -84,17 +84,46 @@ export const productsApiSlice = apiSlice.injectEndpoints({
       invalidatesTags: ['Products'] //Frena el cacheo para tener la data fresca
     }), */
     uploadProductImage: builder.mutation({
-      query: (data) => ({
+      query: (data) => {
+        const token = localStorage.getItem('token');
+        console.log(token)
+
+        return{
+          url: `${UPLOADS_URL}`,
+          method: 'POST',
+          body: data,
+          credentials: 'include',
+          headers: {
+              'Authorization': `Bearer ${token}`,
+          },
+        }
+
+      },
+/*       query: (data) => ({
         url: `${UPLOADS_URL}`,
         method: 'POST',
         body: data
-      })
+      }) */
     }),
     deleteProduct: builder.mutation({
-      query: (productId) => ({
+      query: (productId) => {
+        const token = localStorage.getItem('token');
+        console.log(token)
+
+        return{
+          url: `${PRODUCTS_URL}/${productId}`,
+          method: 'DELETE',
+          credentials: 'include',
+          headers: {
+              'Authorization': `Bearer ${token}`,
+          },
+        }
+
+      },
+/*       query: (productId) => ({
         url: `${PRODUCTS_URL}/${productId}`,
         method: 'DELETE',
-      })
+      }) */
     }),
     createReview: builder.mutation({
       query: (data) => ({

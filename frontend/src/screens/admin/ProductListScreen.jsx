@@ -37,23 +37,14 @@ const ProductListScreen = () => {
   };
 
   const createProductHandler = async () => {
-    try {
-      console.log("entro a try");
-      await createProduct();
-      refetch();
-    } catch (error) {
-      console.log("entro a catch");
-      toast.error(error?.data?.message || error.error);
-    }
-    /*     if (window.confirm("Are you sure you want to create a new product?")) {
+    if (window.confirm("Are you sure you want to create a new product?")) {
       try {
-        console.log("entro a try");
         await createProduct();
         refetch();
       } catch (error) {
         toast.error(error?.data?.message || error.error);
       }
-    } */
+    }
   };
 
   return (
