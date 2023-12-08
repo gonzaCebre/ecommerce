@@ -33,6 +33,24 @@ const upload = multer({storage, fileFilter});
 const uploadSingleImage = upload.single('image');
 
 router.post('/', (req, res) => {
+    uploadSingleImage(req, res, function (err) {
+        if (err) {
+            return res.status(400).send({ message: err.message });
+        }
+
+        // Verifica que req.file esté definido antes de acceder a req.file.path
+        if (req.file) {
+            return res.status(200).send({
+                message: 'Image uploaded successfully',
+                image: `/${req.file.path}`,
+            });
+        } else {
+            return res.status(400).send({ message: 'No file uploaded' });
+        }
+    });
+});
+
+/* router.post('/', (req, res) => {
     uploadSingleImage(req, res, function (err){
         if(err){
             res.status(400).send({message: err.message});
@@ -48,6 +66,6 @@ router.post('/', (req, res) => {
             res.status(400).send({ message: 'No file uploaded' });
         }
     });
-});
+}); */
 
 export default router;
