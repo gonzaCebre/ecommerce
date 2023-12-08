@@ -7,7 +7,6 @@ export const ordersApiSlice = apiSlice.injectEndpoints({
             query: (order) => {
             //Obtengo el token desde localstorage
             const token = localStorage.getItem('token');
-            console.log('Token obtenido desde Create Order: ' + token)
 
                 return {
                     url: ORDERS_URL,
@@ -86,17 +85,42 @@ export const ordersApiSlice = apiSlice.injectEndpoints({
             keepUnusedDataFor: 5,
         }),
         getOrders: builder.query({
-            query: () => ({
+            query: () => {
+                //Obtengo el token desde localstorage
+                const token = localStorage.getItem('token');
+
+                return{
+                    url: ORDERS_URL,
+                    credentials: 'include',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    },
+                }
+            },
+/*             query: () => ({
                 url: ORDERS_URL,
                 credentials: 'include',
-            }),
+            }), */
             keepUnusedDataFor: 5,
         }),
         deliverOrder: builder.mutation({
-            query: (orderId) => ({
+            query: (orderId) => {
+                //Obtengo el token desde localstorage
+                const token = localStorage.getItem('token');
+
+                return{
+                    url: `${ORDERS_URL}/${orderId}/deliver`,
+                    method: 'PUT',
+                    credentials: 'include',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    },
+                }
+            },
+/*             query: (orderId) => ({
                 url: `${ORDERS_URL}/${orderId}/deliver`,
                 method: 'PUT'
-            })
+            }) */
         }),
     }),
 });

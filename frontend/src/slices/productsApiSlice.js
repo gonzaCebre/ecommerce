@@ -36,7 +36,6 @@ export const productsApiSlice = apiSlice.injectEndpoints({
     createProduct: builder.mutation({
       query: () => {
         const token = localStorage.getItem('token');
-        console.log(token)
 
         return{
           url: PRODUCTS_URL,
@@ -60,7 +59,6 @@ export const productsApiSlice = apiSlice.injectEndpoints({
     updateProduct: builder.mutation({
       query: (data) => {
         const token = localStorage.getItem('token');
-        console.log(token)
 
         return{
           url: `${PRODUCTS_URL}/${data.productId}`,
@@ -86,7 +84,6 @@ export const productsApiSlice = apiSlice.injectEndpoints({
     uploadProductImage: builder.mutation({
       query: (data) => {
         const token = localStorage.getItem('token');
-        console.log(token)
 
         return{
           url: `${UPLOADS_URL}`,
@@ -94,8 +91,13 @@ export const productsApiSlice = apiSlice.injectEndpoints({
           body: data,
           credentials: 'include',
           headers: {
-              'Authorization': `Bearer ${token}`,
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'multipart/form-data', // Ajusta esto según tus necesidades
           },
+          mode: 'cors',
+/*           headers: {
+              'Authorization': `Bearer ${token}`,
+          }, */
         }
 
       },
@@ -108,7 +110,6 @@ export const productsApiSlice = apiSlice.injectEndpoints({
     deleteProduct: builder.mutation({
       query: (productId) => {
         const token = localStorage.getItem('token');
-        console.log(token)
 
         return{
           url: `${PRODUCTS_URL}/${productId}`,

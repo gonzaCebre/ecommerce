@@ -32,39 +32,103 @@ export const usersApiSlice = apiSlice.injectEndpoints({
       }),
     }),
     profile: builder.mutation({
-      query: (data) => ({
+      query: (data) => {
+        const token = localStorage.getItem('token');
+
+        return{
+          url: `${USERS_URL}/profile`,
+          method: 'PUT',
+          body: data,
+          credentials: 'include',
+          headers: {
+              'Authorization': `Bearer ${token}`,
+          },
+        }
+
+      },
+/*       query: (data) => ({
         // eslint-disable-next-line no-undef
         url: `${USERS_URL}/profile`,
         method: "PUT",        
         credentials: "include",
         body: data,
-      }),
+      }), */
     }),
     getUsers: builder.query({
-      query: () => ({        
+      query: () => {
+        const token = localStorage.getItem('token');
+
+        return{
+          url: USERS_URL,
+          credentials: 'include',
+          headers: {
+              'Authorization': `Bearer ${token}`,
+          },
+        }
+
+      },
+/*       query: () => ({        
         url: USERS_URL,
-      }),
+      }), */
       providesTags: ['Users'],
       keepUnusedDataFor: 5
     }),
     deleteUser: builder.mutation({
-      query: (userId) => ({
+      query: (userId) => {
+        const token = localStorage.getItem('token');
+
+        return{
+          url: `${USERS_URL}/${userId}`,
+          method: "DELETE",
+          credentials: 'include',
+          headers: {
+              'Authorization': `Bearer ${token}`,
+          },
+        }
+
+      },
+/*       query: (userId) => ({
         url: `${USERS_URL}/${userId}`,
         method: "DELETE",
-      }),
+      }), */
     }),
     getUserDetails: builder.query({
-      query: (userId) => ({        
+      query: (userId) => {
+        const token = localStorage.getItem('token');
+
+        return{
+          url: `${USERS_URL}/${userId}`,
+          credentials: 'include',
+          headers: {
+              'Authorization': `Bearer ${token}`,
+          },
+        }
+
+      },
+/*       query: (userId) => ({        
         url: `${USERS_URL}/${userId}`,
-      }),
+      }), */
       keepUnusedDataFor: 5
     }),
     updateUser: builder.mutation({
-      query: (data) => ({
+      query: (data) => {
+        const token = localStorage.getItem('token');
+
+        return{
+          url: `${USERS_URL}/${data.userId}`,
+          body: data,
+          credentials: 'include',
+          headers: {
+              'Authorization': `Bearer ${token}`,
+          },
+        }
+
+      },
+/*       query: (data) => ({
         url: `${USERS_URL}/${data.userId}`,
         method: "PUT",
         body: data
-      }),  
+      }),  */ 
       invalidatesTags: ['Users']    
     }),
   }),
