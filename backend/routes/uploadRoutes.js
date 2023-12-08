@@ -39,7 +39,7 @@ router.post('/', (req, res) => {
             return res.status(400).json({ message: err.message });
         } else if (err) {
             // Otro tipo de error
-            return res.status(500).json({ message: 'Internal Server Error' });
+            return res.status(500).send('Internal Server Error');
         }
 
         // Verifica que req.file esté definido antes de acceder a req.file.path
