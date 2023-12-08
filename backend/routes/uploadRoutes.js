@@ -38,6 +38,9 @@ router.post('/', (req, res) => {
             res.status(400).send({message: err.message});
         }
 
+        // Configura el encabezado CORS manualmente
+        res.header('Access-Control-Allow-Origin', '*');
+
         res.status(200).send({
             message: 'Image uploaded successfully',
             image: `/${req.file.path}`,
