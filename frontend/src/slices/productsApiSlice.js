@@ -95,7 +95,6 @@ export const productsApiSlice = apiSlice.injectEndpoints({
           credentials: 'include',
           headers: {
             'Authorization': `Bearer ${token}`,
-            'Content-Type': 'multipart/form-data',
           },
           mode: 'cors',
 /*           headers: {
