@@ -85,10 +85,13 @@ export const productsApiSlice = apiSlice.injectEndpoints({
       query: (data) => {
         const token = localStorage.getItem('token');
 
+        const formData = new FormData();
+        formData.append('image', data); // Asegúrate de que 'data' contenga la imagen
+
         return{
           url: `${UPLOADS_URL}`,
-          method: 'POST',
-          body: data,
+          method: 'POST',          
+          body: formData,
           credentials: 'include',
           headers: {
             'Authorization': `Bearer ${token}`,
