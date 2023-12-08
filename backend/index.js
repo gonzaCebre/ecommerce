@@ -30,7 +30,7 @@ app.use(cookieParser()); //Nos permite acceder a las cookies
 //Para produccion
 const corsOptions = {
   origin: "*", // Reemplaza con el origen exacto de tu cliente
-  credentials: true, // Habilita las solicitudes con credenciales
+  /* credentials: true, */ // Habilita las solicitudes con credenciales
 };
 /* //Para produccion
 const corsOptions = {

@@ -40,7 +40,7 @@ export const productsApiSlice = apiSlice.injectEndpoints({
         return{
           url: PRODUCTS_URL,
           method: 'POST',
-          credentials: 'include',
+          /* credentials: 'include', */
           headers: {
               'Authorization': `Bearer ${token}`,
           },
@@ -64,7 +64,7 @@ export const productsApiSlice = apiSlice.injectEndpoints({
           url: `${PRODUCTS_URL}/${data.productId}`,
           method: 'PUT',
           body: data,
-          credentials: 'include',
+          /* credentials: 'include', */
           headers: {
               'Authorization': `Bearer ${token}`,
           },
@@ -115,7 +115,7 @@ export const productsApiSlice = apiSlice.injectEndpoints({
         return{
           url: `${PRODUCTS_URL}/${productId}`,
           method: 'DELETE',
-          credentials: 'include',
+          /* credentials: 'include', */
           headers: {
               'Authorization': `Bearer ${token}`,
           },

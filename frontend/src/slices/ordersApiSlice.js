@@ -12,7 +12,7 @@ export const ordersApiSlice = apiSlice.injectEndpoints({
                     url: ORDERS_URL,
                     method: 'POST',
                     body: {...order},
-                    credentials: 'include',
+                    /* credentials: 'include', */
                     headers: {
                         'Authorization': `Bearer ${token}`,
                     },
@@ -34,7 +34,7 @@ export const ordersApiSlice = apiSlice.injectEndpoints({
 
                 return {
                     url: `${ORDERS_URL}/${orderId}`,
-                    credentials: 'include',
+                    /* credentials: 'include', */
                     headers: {
                         'Authorization': `Bearer ${token}`,
                     },
@@ -50,7 +50,7 @@ export const ordersApiSlice = apiSlice.injectEndpoints({
                     url: `${ORDERS_URL}/${orderId}/pay`,
                     method: 'PUT',
                     body: {...details},
-                    credentials: 'include',
+                    /* credentials: 'include', */
                     headers: {
                         'Authorization': `Bearer ${token}`,
                     },
@@ -76,7 +76,7 @@ export const ordersApiSlice = apiSlice.injectEndpoints({
 
                 return{
                     url: `${ORDERS_URL}/mine`,
-                    credentials: 'include',
+                    /* credentials: 'include', */
                     headers: {
                         'Authorization': `Bearer ${token}`,
                     },
@@ -91,7 +91,7 @@ export const ordersApiSlice = apiSlice.injectEndpoints({
 
                 return{
                     url: ORDERS_URL,
-                    credentials: 'include',
+                    /* credentials: 'include', */
                     headers: {
                         'Authorization': `Bearer ${token}`,
                     },
@@ -111,7 +111,7 @@ export const ordersApiSlice = apiSlice.injectEndpoints({
                 return{
                     url: `${ORDERS_URL}/${orderId}/deliver`,
                     method: 'PUT',
-                    credentials: 'include',
+                    /* credentials: 'include', */
                     headers: {
                         'Authorization': `Bearer ${token}`,
                     },

@@ -9,7 +9,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         // eslint-disable-next-line no-undef
         url: `${USERS_URL}/auth`, //'api/users'
         method: "POST",
-        credentials: "include",
+        /* credentials: "include", */
         body: data,
       }),
     }),
@@ -19,7 +19,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         // eslint-disable-next-line no-undef
         url: `${USERS_URL}`, //'api/users'
         method: "POST",                
-        credentials: "include",
+        /* credentials: "include", */
         body: data,
       }),
     }),
@@ -39,7 +39,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
           url: `${USERS_URL}/profile`,
           method: 'PUT',
           body: data,
-          credentials: 'include',
+          /* credentials: 'include', */
           headers: {
               'Authorization': `Bearer ${token}`,
           },
@@ -60,7 +60,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
 
         return{
           url: USERS_URL,
-          credentials: 'include',
+          /* credentials: 'include', */
           headers: {
               'Authorization': `Bearer ${token}`,
           },
@@ -80,7 +80,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         return{
           url: `${USERS_URL}/${userId}`,
           method: "DELETE",
-          credentials: 'include',
+          /* credentials: 'include', */
           headers: {
               'Authorization': `Bearer ${token}`,
           },
@@ -98,7 +98,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
 
         return{
           url: `${USERS_URL}/${userId}`,
-          credentials: 'include',
+          /* credentials: 'include', */
           headers: {
               'Authorization': `Bearer ${token}`,
           },
@@ -117,7 +117,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         return{
           url: `${USERS_URL}/${data.userId}`,
           body: data,
-          credentials: 'include',
+          /* credentials: 'include', */
           headers: {
               'Authorization': `Bearer ${token}`,
           },
