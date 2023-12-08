@@ -38,11 +38,15 @@ router.post('/', (req, res) => {
             res.status(400).send({message: err.message});
         }
 
-
-        res.status(200).send({
-            message: 'Image uploaded successfully',
-            image: `/${req.file.path}`,
-        });
+        // Verifica que req.file esté definido antes de acceder a req.file.path
+        if (req.file) {
+            res.status(200).send({
+                message: 'Image uploaded successfully',
+                image: `/${req.file.path}`,
+            });
+        } else {
+            res.status(400).send({ message: 'No file uploaded' });
+        }
     });
 });
 
