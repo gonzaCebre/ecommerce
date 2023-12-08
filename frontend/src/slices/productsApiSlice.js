@@ -92,7 +92,6 @@ export const productsApiSlice = apiSlice.injectEndpoints({
           url: `${UPLOADS_URL}`,
           method: 'POST',          
           body: formData,
-          credentials: 'include',
           headers: {
             'Authorization': `Bearer ${token}`,
           },
