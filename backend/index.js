@@ -30,7 +30,7 @@ app.use(cookieParser()); //Nos permite acceder a las cookies
 //Para produccion
 const corsOptions = {
   origin: "https://frontend-delta-rouge-29.vercel.app", // Reemplaza con el origen exacto de tu cliente
-  credentials: true, // Habilita las solicitudes con credenciales
+  /* credentials: true, */ // Habilita las solicitudes con credenciales
 };
 
 
