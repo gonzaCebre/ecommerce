@@ -34,18 +34,22 @@ const uploadSingleImage = upload.single('image');
 
 router.post('/', (req, res) => {
     uploadSingleImage(req, res, function (err) {
-        if (err) {
-            return res.status(400).send({ message: err.message });
+        if (err instanceof multer.MulterError) {
+            // MulterError es un error específico de multer
+            return res.status(400).json({ message: err.message });
+        } else if (err) {
+            // Otro tipo de error
+            return res.status(500).json({ message: 'Internal Server Error' });
         }
 
         // Verifica que req.file esté definido antes de acceder a req.file.path
         if (req.file) {
-            return res.status(200).send({
+            res.status(200).json({
                 message: 'Image uploaded successfully',
                 image: `/${req.file.path}`,
             });
         } else {
-            return res.status(400).send({ message: 'No file uploaded' });
+            res.status(400).json({ message: 'No file uploaded' });
         }
     });
 });
