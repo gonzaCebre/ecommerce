@@ -86,21 +86,14 @@ router.post('/', upload.single('image'), async (req, res) => {
     try {
       const file = req.file;
   
-      // Guarda temporalmente el búfer en un archivo
-      const tempFilePath = `temp/${file.originalname}`; // Ajusta la ruta según tus necesidades
-      await fsPromises.writeFile(tempFilePath, file.buffer);
-  
-      // Sube el archivo temporal a Cloudinary
-      const result = await cloudinary.uploader.upload(tempFilePath, {
+      // Sube el búfer directamente a Cloudinary
+      const result = await cloudinary.uploader.upload(file.buffer, {
         resource_type: 'auto',
         public_id: 'tu_prefijo/' + file.originalname
       });
   
       const imageUrl = result.secure_url; // Obtén la URL segura de la imagen
       console.log(imageUrl);
-  
-      // Elimina el archivo temporal después de subirlo
-      await fsPromises.unlink(tempFilePath);
   
       res.json({ imageUrl });
     } catch (error) {
