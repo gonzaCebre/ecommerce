@@ -78,7 +78,7 @@ router.post('/', (req, res) => {
 
 
 // Configura multer para manejar la carga de archivos
-const storage = multer.memoryStorage();
+/* const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 // Ruta para manejar la carga de imágenes
@@ -100,6 +100,34 @@ router.post('/', upload.single('image'), async (req, res) => {
       console.error('Error al cargar la imagen:', error);
       res.status(500).send('Error al cargar la imagen: ' + error.message);
     }
-  });
+  }); */
+
+
+
+const storage = multer.memoryStorage();
+const multerUploads = multer({ storage: storage }).single('file');
+
+app.post('/upload', multerUploads, async (req, res) => {
+  try {
+    if (req.file) {
+      const cld_upload_stream = cloudinary.uploader.upload_stream({ folder: "temp" }, (error, result) => {
+        if (error) {
+          console.error(error);
+          return res.status(500).json({ msg: "Error al cargar la imagen en Cloudinary" });
+        }
+
+        console.log(result);
+        res.json({ public_id: result.public_id, url: result.secure_url });
+      });
+
+      streamifier.createReadStream(req.file.buffer).pipe(cld_upload_stream);
+    } else {
+      return res.status(400).json({ msg: "No se ha proporcionado ningún archivo." });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Error interno del servidor" });
+  }
+});
 
 export default router;
