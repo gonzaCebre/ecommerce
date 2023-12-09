@@ -75,6 +75,7 @@ const ProductEditScreen = () => {
     formData.append("image", e.target.files[0]);
     try {
       const res = await uploadProductImage(formData).unwrap();
+      console.log(res);
       toast.success(res.message);
       setImage(res.image);
     } catch (error) {
@@ -114,6 +115,7 @@ const ProductEditScreen = () => {
               onChange={(e) => setPrice(e.target.value)}
             ></Form.Control>
           </Form.Group>
+
           <Form.Group controlId="image" className="my-2">
             <Form.Label>Image</Form.Label>
             <Form.Control

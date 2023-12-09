@@ -1,0 +1,43 @@
+{
+  "name": "ecommerce",
+  "version": "1.0.0",
+  "description": "Ecommerce",
+  "proxy": "http://localhost:5000/",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node backend/index",
+    "server": "nodemon backend/index",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\" ",
+    "data:import": "node backend/seeder",
+    "data:destroy": "node backend/seeder -d",
+    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend"
+  },
+  "author": "Gonza",
+  "license": "ISC",
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.4.2",
+    "@fortawesome/free-brands-svg-icons": "^6.4.2",
+    "@fortawesome/free-solid-svg-icons": "^6.4.2",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "@mercadopago/sdk-react": "^0.0.13",
+    "bcryptjs": "^2.4.3",
+    "colors": "^1.4.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-async-handler": "^1.2.0",
+    "jsonwebtoken": "^9.0.0",
+    "mercadopago": "^1.5.17",
+    "mongoose": "^7.0.5",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1"
+  },
+  "devDependencies": {
+    "concurrently": "^8.0.1",
+    "node-sass": "^9.0.0",
+    "nodemon": "^2.0.22"
+  }
+}

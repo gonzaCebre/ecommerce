@@ -1,9 +1,12 @@
 import path from 'path'
 import express from 'express'
 import multer from 'multer'
+import cloudinary from '../utils/cloudinary.js';
+import { promises as fsPromises } from 'fs';
+
 
 const router = express.Router();
-
+/* 
 //Debemos decirle de donde va a venir la imagen
 const storage = multer.diskStorage({ 
     destination(req, file, cb) {
@@ -52,7 +55,7 @@ router.post('/', (req, res) => {
             res.status(400).json({ message: 'No file uploaded' });
         }
     });
-});
+}); */
 
 /* router.post('/', (req, res) => {
     uploadSingleImage(req, res, function (err){
@@ -71,5 +74,52 @@ router.post('/', (req, res) => {
         }
     });
 }); */
+
+
+
+// Configura multer para manejar la carga de archivos
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
+// Ruta para manejar la carga de imágenes
+router.post('/', upload.single('image'), async (req, res) => {
+    try {
+      const file = req.file;
+  
+      // Ruta del directorio temporal
+      const tempDirectory = 'temp'; // Ajusta la ruta según tus necesidades
+  
+      // Crea el directorio temporal si no existe
+      await fsPromises.mkdir(tempDirectory, { recursive: true });
+  
+      // Ruta completa del archivo temporal
+      const tempFilePath = `${tempDirectory}/${file.originalname}`;
+  
+      // Guarda temporalmente el búfer en un archivo
+      await fsPromises.writeFile(tempFilePath, file.buffer);
+  
+      // Sube el archivo temporal a Cloudinary
+      const result = await cloudinary.uploader.upload(tempFilePath, {
+        resource_type: 'auto',
+        public_id: 'tu_prefijo/' + file.originalname
+      });
+  
+      const imageUrl = result.secure_url; // Obtén la URL segura de la imagen
+      console.log(imageUrl);
+  
+      // Elimina el archivo temporal después de subirlo
+      await fsPromises.unlink(tempFilePath);
+
+      res.status(200).send({
+        message: 'Image uploaded successfully',
+        image: imageUrl,
+    });
+  
+      /* res.json({ imageUrl }); */
+    } catch (error) {
+      console.error('Error al cargar la imagen:', error);
+      res.status(500).send('Error al cargar la imagen: ' + error.message);
+    }
+  });
 
 export default router;
