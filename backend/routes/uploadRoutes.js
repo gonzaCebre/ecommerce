@@ -2,7 +2,7 @@ import path from 'path'
 import express from 'express'
 import multer from 'multer'
 import cloudinary from '../utils/cloudinary.js';
-import { promises as fsPromises, mkdir } from 'fs';
+import { promises as fsPromises } from 'fs';
 
 
 const router = express.Router();
@@ -83,26 +83,11 @@ const upload = multer({ storage: storage });
 
 // Ruta para manejar la carga de imágenes
 router.post('/', upload.single('image'), async (req, res) => {
-    const file = req.file;
-  
-    // Ruta del directorio temporal
-    const tempDirectory = 'temp'; // Ajusta la ruta según tus necesidades  
-
-    // Ruta completa del archivo temporal
-    const tempFilePath = `${tempDirectory}/${file.originalname}`;
-    console.log(tempFilePath)
-
-    /* try {
+    try {
       const file = req.file;
   
-      // Ruta del directorio temporal
-      const tempDirectory = 'temp'; // Ajusta la ruta según tus necesidades  
- 
-      // Ruta completa del archivo temporal
-      const tempFilePath = `${tempDirectory}/${file.originalname}`;
-      console.log(tempFilePath)
-  
       // Guarda temporalmente el búfer en un archivo
+      const tempFilePath = `temp/${file.originalname}`; // Ajusta la ruta según tus necesidades
       await fsPromises.writeFile(tempFilePath, file.buffer);
   
       // Sube el archivo temporal a Cloudinary
@@ -117,13 +102,11 @@ router.post('/', upload.single('image'), async (req, res) => {
       // Elimina el archivo temporal después de subirlo
       await fsPromises.unlink(tempFilePath);
   
-      res.status(200).send({
-        message: 'Image uploaded successfully',
-      });
+      res.json({ imageUrl });
     } catch (error) {
       console.error('Error al cargar la imagen:', error);
       res.status(500).send('Error al cargar la imagen: ' + error.message);
-    } */
+    }
   });
 
 export default router;
