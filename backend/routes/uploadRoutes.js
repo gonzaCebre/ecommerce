@@ -122,7 +122,7 @@ app.post('/upload', multerUploads, async (req, res) => {
 
       streamifier.createReadStream(req.file.buffer).pipe(cld_upload_stream);
     } else {
-      return res.status(400).json({ msg: "No se ha proporcionado ningún archivo." });
+      return res.status(400).json({ msg: "No se ha proporcionado ningún archivo" });
     }
   } catch (err) {
     console.error(err);
