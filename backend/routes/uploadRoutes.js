@@ -2,7 +2,7 @@ import path from 'path'
 import express from 'express'
 import multer from 'multer'
 import cloudinary from '../utils/cloudinary.js';
-import { promises as fsPromises } from 'fs';
+import { promises as fsPromises, mkdir } from 'fs';
 
 
 const router = express.Router();
