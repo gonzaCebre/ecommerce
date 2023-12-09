@@ -83,7 +83,16 @@ const upload = multer({ storage: storage });
 
 // Ruta para manejar la carga de imágenes
 router.post('/', upload.single('image'), async (req, res) => {
-    try {
+    const file = req.file;
+  
+    // Ruta del directorio temporal
+    const tempDirectory = 'temp'; // Ajusta la ruta según tus necesidades  
+
+    // Ruta completa del archivo temporal
+    const tempFilePath = `${tempDirectory}/${file.originalname}`;
+    console.log(tempFilePath)
+
+    /* try {
       const file = req.file;
   
       // Ruta del directorio temporal
@@ -114,7 +123,7 @@ router.post('/', upload.single('image'), async (req, res) => {
     } catch (error) {
       console.error('Error al cargar la imagen:', error);
       res.status(500).send('Error al cargar la imagen: ' + error.message);
-    }
+    } */
   });
 
 export default router;
