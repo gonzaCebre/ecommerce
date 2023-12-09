@@ -107,7 +107,7 @@ router.post('/', upload.single('image'), async (req, res) => {
 const storage = multer.memoryStorage();
 const multerUploads = multer({ storage: storage }).single('file');
 
-app.post('/upload', multerUploads, async (req, res) => {
+router.post('/upload', multerUploads, async (req, res) => {
   try {
     if (req.file) {
       const cld_upload_stream = cloudinary.uploader.upload_stream({ folder: "temp" }, (error, result) => {
