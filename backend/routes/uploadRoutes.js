@@ -91,6 +91,7 @@ router.post('/', upload.single('image'), async (req, res) => {
  
       // Ruta completa del archivo temporal
       const tempFilePath = `${tempDirectory}/${file.originalname}`;
+      console.log(tempFilePath)
   
       // Guarda temporalmente el búfer en un archivo
       await fsPromises.writeFile(tempFilePath, file.buffer);
