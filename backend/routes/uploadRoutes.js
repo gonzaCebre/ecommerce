@@ -89,8 +89,8 @@ router.post('/', upload.single('image'), async (req, res) => {
       // Ruta del directorio temporal
       const tempDirectory = 'temp'; // Ajusta la ruta según tus necesidades
   
-      // Crea el directorio temporal si no existe
-      await fsPromises.mkdir(tempDirectory, { recursive: true });
+      // Asegúrate de que el directorio exista o créalo si no
+      await mkdir(tempDirectory, { recursive: true });
   
       // Ruta completa del archivo temporal
       const tempFilePath = `${tempDirectory}/${file.originalname}`;
@@ -109,13 +109,10 @@ router.post('/', upload.single('image'), async (req, res) => {
   
       // Elimina el archivo temporal después de subirlo
       await fsPromises.unlink(tempFilePath);
-
+  
       res.status(200).send({
         message: 'Image uploaded successfully',
-        image: imageUrl,
-    });
-  
-      /* res.json({ imageUrl }); */
+      });
     } catch (error) {
       console.error('Error al cargar la imagen:', error);
       res.status(500).send('Error al cargar la imagen: ' + error.message);
