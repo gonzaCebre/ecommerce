@@ -113,7 +113,7 @@ app.post('/upload', multerUploads, async (req, res) => {
       const cld_upload_stream = cloudinary.uploader.upload_stream({ folder: "temp" }, (error, result) => {
         if (error) {
           console.error(error);
-          return res.status(500).json({ msg: "Error al cargar la imagen en Cloudinary" });
+          return res.status(500).json({ msg: "Error al cargar la imagen en Cloudinar" });
         }
 
         console.log(result);
