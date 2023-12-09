@@ -87,7 +87,7 @@ router.post('/', upload.single('image'), async (req, res) => {
       const file = req.file;
   
       // Ruta del directorio temporal
-      const tempDirectory = '../../temp/'; // Ajusta la ruta según tus necesidades  
+      const tempDirectory = '../../temp'; // Ajusta la ruta según tus necesidades  
  
       // Ruta completa del archivo temporal
       const tempFilePath = `${tempDirectory}/${file.originalname}`;
