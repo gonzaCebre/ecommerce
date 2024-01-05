@@ -1,5 +1,5 @@
 import {apiSlice} from './apiSlice'
-import { MERCADOPAGO_URL, MERCADOPAGO_URL_PUBLIC_KEY, ORDERS_URL, PAYPAL_URL } from '../constants'
+import { MERCADOPAGO_URL_PUBLIC_KEY, ORDERS_URL, PAYPAL_URL } from '../constants'
 
 export const ordersApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -19,14 +19,6 @@ export const ordersApiSlice = apiSlice.injectEndpoints({
                 }
             }
         }),
-/*         createOrder: builder.mutation({
-            query: (order) => ({
-                url: ORDERS_URL,
-                method: 'POST',
-                body: {...order},
-                credentials: 'include',
-            })
-        }), */
         getOrderDetails: builder.query({
             query: (orderId) => {
                 //Obtengo el token desde localstorage
@@ -97,10 +89,6 @@ export const ordersApiSlice = apiSlice.injectEndpoints({
                     },
                 }
             },
-/*             query: () => ({
-                url: ORDERS_URL,
-                credentials: 'include',
-            }), */
             keepUnusedDataFor: 5,
         }),
         deliverOrder: builder.mutation({
@@ -117,10 +105,6 @@ export const ordersApiSlice = apiSlice.injectEndpoints({
                     },
                 }
             },
-/*             query: (orderId) => ({
-                url: `${ORDERS_URL}/${orderId}/deliver`,
-                method: 'PUT'
-            }) */
         }),
     }),
 });

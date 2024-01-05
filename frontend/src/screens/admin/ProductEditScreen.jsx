@@ -134,12 +134,12 @@ const ProductEditScreen = () => {
 
           <Form.Group controlId="brand" className="my-2">
             <Form.Label>Brand</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter new brand"
+            <Form.Select
               value={brand}
               onChange={(e) => setBrand(e.target.value)}
-            ></Form.Control>
+            >
+              <option>Stay Chill</option>
+            </Form.Select>
           </Form.Group>
           <Form.Group controlId="countInStock" className="my-2">
             <Form.Label>Count In Stock</Form.Label>
@@ -152,12 +152,18 @@ const ProductEditScreen = () => {
           </Form.Group>
           <Form.Group controlId="category" className="my-2">
             <Form.Label>Category</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter new category"
+            <Form.Select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-            ></Form.Control>
+            >
+              <option>portatucas</option>
+              <option>filtros</option>
+              <option>pikas</option>
+              <option>sedas</option>
+              <option>cogolleros</option>
+              <option>fuegos</option>
+              <option>llaveros</option>
+            </Form.Select>
           </Form.Group>
           <Form.Group controlId="description" className="my-2">
             <Form.Label>Description</Form.Label>

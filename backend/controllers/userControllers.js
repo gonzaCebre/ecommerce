@@ -16,27 +16,6 @@ const authUser = asyncHandler(async (req, res) => {
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
       expiresIn: "30d",
     });
-  
-    console.log('El token despues del auth es: ' + token)
-  
-/*     // Set JWT as HTTP-only cookie
-    res.cookie("jwt", token, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "None",
-      maxAge: 30 * 24 * 60 * 60 * 1000, // 30 dias
-      domain: "vercel.app"
-    }); */
-
-/*     // Para desarrollo
-    res.cookie("jwt", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV !== "development",
-      sameSite: "strict",
-      maxAge: 30 * 24 * 60 * 60 * 1000, // 30 dias
-    }); */
-
-    /* generateToken(res, user._id);  */
 
     res.status(200).json({
       _id: user._id,
@@ -71,13 +50,10 @@ const registerUser = asyncHandler(async (req, res) => {
   });
 
   if (user) {
-    /* generateToken(res, user._id); */
 
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
       expiresIn: "30d",
     });
-  
-    console.log(token)
 
     res.status(201).json({
       _id: user._id,

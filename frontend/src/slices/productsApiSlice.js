@@ -15,18 +15,6 @@ export const productsApiSlice = apiSlice.injectEndpoints({
       providesTags: ['Products'], //Esta opcion evita que tengamos que refrescar manualmente la pagina
       keepUnusedDataFor: 5,
     }),
-/*     getProducts: builder.query({
-      query: ({ keyword, pageNumber  }) => ({
-        url: PRODUCTS_URL, //'api/products'
-        params: {
-          keyword,
-          pageNumber,
-          
-        }
-      }),
-      providesTags: ['Products'], //Esta opcion evita que tengamos que refrescar manualmente la pagina
-      keepUnusedDataFor: 5,
-    }), */
     getProductDetails: builder.query({
       query: (productId) => ({
         url: `${PRODUCTS_URL}/${productId}`, //'api/products'
@@ -49,13 +37,6 @@ export const productsApiSlice = apiSlice.injectEndpoints({
       },
       invalidatesTags: ['Product'] //Frena el cacheo para tener la data fresca
     }),
-/*     createProduct: builder.mutation({
-      query: () => ({
-        url: PRODUCTS_URL,
-        method: 'POST',
-      }),
-      invalidatesTags: ['Product'] //Frena el cacheo para tener la data fresca
-    }), */
     updateProduct: builder.mutation({
       query: (data) => {
         const token = localStorage.getItem('token');
@@ -73,14 +54,6 @@ export const productsApiSlice = apiSlice.injectEndpoints({
       },
       invalidatesTags: ['Products'] //Frena el cacheo para tener la data fresca
     }),
-/*     updateProduct: builder.mutation({
-      query: (data) => ({
-        url: `${PRODUCTS_URL}/${data.productId}`,
-        method: 'PUT',
-        body: data
-      }),
-      invalidatesTags: ['Products'] //Frena el cacheo para tener la data fresca
-    }), */
     uploadProductImage: builder.mutation({
       query: (data) => {
         const token = localStorage.getItem('token');
@@ -95,17 +68,9 @@ export const productsApiSlice = apiSlice.injectEndpoints({
           headers: {
             'Authorization': `Bearer ${token}`,
           },
-/*           headers: {
-              'Authorization': `Bearer ${token}`,
-          }, */
         }
 
       },
-/*       query: (data) => ({
-        url: `${UPLOADS_URL}`,
-        method: 'POST',
-        body: data
-      }) */
     }),
     deleteProduct: builder.mutation({
       query: (productId) => {
@@ -121,10 +86,6 @@ export const productsApiSlice = apiSlice.injectEndpoints({
         }
 
       },
-/*       query: (productId) => ({
-        url: `${PRODUCTS_URL}/${productId}`,
-        method: 'DELETE',
-      }) */
     }),
     createReview: builder.mutation({
       query: (data) => ({

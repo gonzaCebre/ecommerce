@@ -11,7 +11,6 @@ const CategoriesButtons = () => {
       <Link to="/category/sedas">Sedas</Link>
       <Link to="/category/filtros">Filtros</Link>
       <Link to="/category/otros">Otros</Link>
-      <Link to="/category/Electronics">Electronics</Link>
     </div>
   );
 };

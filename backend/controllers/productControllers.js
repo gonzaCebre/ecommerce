@@ -23,11 +23,10 @@ const getProducts = asyncHandler(async (req, res) => {
 //@route    GET /api/products
 //@access    Public
 const getProductsByCategory = asyncHandler(async (req, res) => {
-  const pageSize = 2; //Numero de productos que se van a mostrar por pagina
+  const pageSize = 6; //Numero de productos que se van a mostrar por pagina
   const page = Number(req.query.pageNumber) || 1; //Numero de pagina que esta siendo pedido, si no existe es la pag 1
   
   const category = req.query.category;
-  console.log(category)
   
   const count = await Product.countDocuments({category}); //Este es un metodo de mongoose que cuenta la cant de documentos
 
@@ -60,7 +59,7 @@ const createProduct = asyncHandler(async (req, res) => {
     price: 0,
     user: req.user._id,
     image: '/images/sample.jpg',
-    brand: 'Sample brand',
+    brand: 'Stay Chill',
     category: 'Sample category',
     countInStock: 0,
     numReviews: 0,

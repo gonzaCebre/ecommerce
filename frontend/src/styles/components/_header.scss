@@ -63,8 +63,10 @@ header{
                         .dropdown-menu{
                             background-color: $violet;
                             width: 100%;
-                            /* width: fit-content; */
+                            width: fit-content;
                             min-width: 0 !important;
+                            padding: .5rem 1rem;
+                            left: 0;
     
                             .dropdown-item{
                                 width: fit-content;

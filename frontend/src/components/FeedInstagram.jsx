@@ -11,8 +11,9 @@ const FeedInstagram = () => {
   useEffect(() => {
     fetch(`${INSTAGRAM_URL}`)
       .then((response) => response.json()) // convertir a json
-      .then((json) => setIgToken(json.igToken)); //imprimir los datos en la consola;
-  }, []);
+      .then((json) => setIgToken(json.igToken)) //imprimir los datos en la consola;
+      .then(() => console.log(igToken)); //imprimir los datos en la consola;
+  }, [igToken]);
 
   useEffect(() => {
     fetch(
@@ -28,7 +29,7 @@ const FeedInstagram = () => {
   return (
     <div className="feedIg-container">
       <h3>¿TODAVÍA NO NOS SEGUÍS EN IG?</h3>
-      <div className="feedIg">
+      <div className="feedIg my-4">
         {feedIg.map((post) => (
           <div className="feedIg__post">
             <div className="feedIg__post__img">
@@ -44,22 +45,6 @@ const FeedInstagram = () => {
           </div>
         ))}
       </div>
-
-      {/*       <h4>SEGUINOS</h4>
-      <div className="redes">
-        <Link to="https://www.instagram.com/" className="redes__link">
-          <FontAwesomeIcon icon={faInstagram} className="redes__link__icon" />
-        </Link>
-        <Link to="https://www.telegram.com" className="redes__link">
-          <FontAwesomeIcon icon={faTelegram} className="redes__link__icon" />
-        </Link>
-        <Link to="https://www.youtube.com" className="redes__link">
-          <FontAwesomeIcon icon={faYoutube} className="redes__link__icon" />
-        </Link>
-        <Link to="https://www.spotify.com" className="redes__link">
-          <FontAwesomeIcon icon={faSpotify} className="redes__link__icon" />
-        </Link>
-      </div> */}
     </div>
   );
 };

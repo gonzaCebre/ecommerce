@@ -55,7 +55,6 @@ main{
 .button--violet{
   @extend .button;
   background-color: $violet;
-  /* box-shadow: 0.3rem 0.3rem $violet; */
 
   &:hover{
     background-color: $green;
@@ -65,7 +64,6 @@ main{
 .button--green{
   @extend .button;
   background-color: $green;
-  /* box-shadow: 0.3rem 0.3rem $green; */
 
   &:hover{
     background-color: $violet;

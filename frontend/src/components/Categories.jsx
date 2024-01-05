@@ -107,7 +107,7 @@ const Categories = () => {
   }, []);
 
   return (
-    <div className="categories">
+    <div className="categories my-4">
       <h2>¿QUÉ ESTÁS BUSCANDO?</h2>
       <p>Clickeá en la categoría de productos que querés ver</p>
       <svg x="0px" y="0px" viewBox="0 0 1920 1080">

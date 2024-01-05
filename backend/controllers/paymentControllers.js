@@ -25,8 +25,7 @@ const createMercadopagoPreference = asyncHandler(async(req, res) => {
 			"success": `${process.env.HOST}/order/${orderId}`, //Vuelve a la pagina de donde vino. Le podes poner la web que quieras
 			"failure": `${process.env.HOST}/order/${orderId}`, //Vuelve a la pagina de donde vino
 			"pending": `${process.env.HOST}/order/${orderId}`, 
-		},/* 
-		notification_url: 'https://41e0-2803-9800-9887-4b53-ed71-19bf-cb95-b32d.ngrok.io/api/payment/webhook', */
+		},
 		auto_return: "approved",
 	};
 

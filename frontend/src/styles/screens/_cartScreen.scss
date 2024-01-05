@@ -29,6 +29,8 @@
                     display: flex;
                     flex-direction: column;
                     align-items: flex-start;
+                    justify-content: center;
+                    margin-left: 1rem;
 
                     a{
                         color: $violet;
@@ -237,17 +239,17 @@
                     border: 3px solid $violet;
                     box-shadow: 0.3rem 0.3rem $violet;
                     margin-bottom: 1rem;
-                    width: 80%;
+                    width: 50%;
 
                     img{
-                        width: 45%;
+                        width: 35%;
                     }
 
                     &__resume{
-                        width: 45%;
+                        width: 35%;
                         padding: 0.5rem;
                         a{
-                            height: 24px;
+                            font-size: 1.5rem;
                         }
 
                     }

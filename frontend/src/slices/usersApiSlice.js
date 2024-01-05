@@ -14,7 +14,6 @@ export const usersApiSlice = apiSlice.injectEndpoints({
       }),
     }),
     register: builder.mutation({
-      //es mutation porque es un POST REQ
       query: (data) => ({
         // eslint-disable-next-line no-undef
         url: `${USERS_URL}`, //'api/users'
@@ -24,7 +23,6 @@ export const usersApiSlice = apiSlice.injectEndpoints({
       }),
     }),
     logout: builder.mutation({
-      //es mutation porque es un POST REQ
       query: () => ({
         // eslint-disable-next-line no-undef
         url: `${USERS_URL}/logout`,
@@ -46,13 +44,6 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         }
 
       },
-/*       query: (data) => ({
-        // eslint-disable-next-line no-undef
-        url: `${USERS_URL}/profile`,
-        method: "PUT",        
-        credentials: "include",
-        body: data,
-      }), */
     }),
     getUsers: builder.query({
       query: () => {
@@ -67,9 +58,6 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         }
 
       },
-/*       query: () => ({        
-        url: USERS_URL,
-      }), */
       providesTags: ['Users'],
       keepUnusedDataFor: 5
     }),
@@ -87,10 +75,6 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         }
 
       },
-/*       query: (userId) => ({
-        url: `${USERS_URL}/${userId}`,
-        method: "DELETE",
-      }), */
     }),
     getUserDetails: builder.query({
       query: (userId) => {
@@ -105,9 +89,6 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         }
 
       },
-/*       query: (userId) => ({        
-        url: `${USERS_URL}/${userId}`,
-      }), */
       keepUnusedDataFor: 5
     }),
     updateUser: builder.mutation({
@@ -116,6 +97,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
 
         return{
           url: `${USERS_URL}/${data.userId}`,
+          method: "PUT",
           body: data,
           /* credentials: 'include', */
           headers: {
@@ -124,11 +106,6 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         }
 
       },
-/*       query: (data) => ({
-        url: `${USERS_URL}/${data.userId}`,
-        method: "PUT",
-        body: data
-      }),  */ 
       invalidatesTags: ['Users']    
     }),
   }),

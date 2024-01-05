@@ -14,7 +14,6 @@ const protect = asyncHandler(async (req, res, next) => {
   ? req.headers.authorization.split(' ')[1].trim()
   : null;
 
-  console.log(token)
 
   if (token) {
     try {
@@ -28,7 +27,6 @@ const protect = asyncHandler(async (req, res, next) => {
     }
   } else {
     res.status(401);
-    /* throw new Error("Aca esta el error mi pana"); */
     throw new Error("Not authorized, no token");
   }
 });

@@ -17,11 +17,13 @@ const Paginate = ({
             to={
               !isAdmin
                 ? keyword
-                  ? `/search/${keyword}/category/${category}/page/${x + 1}` // Agrega la categoría al enlace de paginación
-                  : `/products/page/${x + 1}` // Agrega la categoría al enlace de paginación
-                : /* : `/category/${category}/page/${x + 1}`  */
-
-                  `/admin/productlist/${x + 1}`
+                  ? category
+                    ? `/search/${keyword}/category/${category}/page/${x + 1}` // Agrega la categoría al enlace de paginación
+                    : `/search/${keyword}/page/${x + 1}`
+                  : category
+                  ? `/category/${category}/page/${x + 1}` // Agrega la categoría al enlace de paginación
+                  : `/products/page/${x + 1}`
+                : `/admin/productlist/page/${x + 1}`
             }
           >
             <Pagination.Item active={x + 1 === page}>{x + 1}</Pagination.Item>

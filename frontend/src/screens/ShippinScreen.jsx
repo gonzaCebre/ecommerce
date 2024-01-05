@@ -124,7 +124,6 @@ const ShippinScreen = () => {
       <CheckoutSteps step1 step2 />
 
       <h1>Envío</h1>
-      {/*Lokear como si fuera una caja */}
 
       <Form onSubmit={submitHandler} className="shipping-form">
         <Form.Group controlId="address" className="shipping-form__item">

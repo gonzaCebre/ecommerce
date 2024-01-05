@@ -4,9 +4,6 @@ import { updateCart } from "../utils/cartUtils";
 const initialState = localStorage.getItem("cart")
   ? JSON.parse(localStorage.getItem("cart")) //primero revisa el localStorage para cargar mas rapido
   : { cartItems: [], shippingAddress: {}, paymentMethod: null }; //si no hay nada en el localStorage crea un array vacio
-/* const initialState = localStorage.getItem("cart")
-  ? JSON.parse(localStorage.getItem("cart")) //primero revisa el localStorage para cargar mas rapido
-  : { cartItems: [], shippingAddress: {}, paymentMethod: 'PayPal' }; //si no hay nada en el localStorage crea un array vacio */
 
 const cartSlice = createSlice({
   name: "cart",

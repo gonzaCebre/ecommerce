@@ -1,24 +1,10 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import {
-  Button,
-  Card,
-  Col,
-  Form,
-  Image,
-  ListGroup,
-  ListGroupItem,
-  Row,
-} from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
-import Rating from "../components/Rating";
+import { Form, Link, useNavigate, useParams } from "react-router-dom";
+import { Button } from "react-bootstrap";
+import { useDispatch } from "react-redux";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import {
-  useGetProductDetailsQuery,
-  useCreateReviewMutation,
-} from "../slices/productsApiSlice";
+import { useGetProductDetailsQuery } from "../slices/productsApiSlice";
 import { addToCart } from "../slices/cartSlice";
 import Meta from "../components/Meta";
 
@@ -29,27 +15,27 @@ const ProductScreen = () => {
   const navigate = useNavigate();
 
   const [qty, setQty] = useState(1);
-  const [rating, setRating] = useState(0);
-  const [comment, setComment] = useState("");
+  /*   const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState(""); */
 
   const {
     data: product,
     isLoading,
-    refetch,
+    /* refetch, */
     error,
   } = useGetProductDetailsQuery(productId);
 
-  const [createReview, { isLoading: loadingProductReview }] =
-    useCreateReviewMutation();
+  /*   const [createReview, { isLoading: loadingProductReview }] =
+    useCreateReviewMutation(); */
 
-  const { userInfo } = useSelector((state) => state.auth);
+  /* const { userInfo } = useSelector((state) => state.auth); */
 
   const addToCartHandler = () => {
     dispatch(addToCart({ ...product, qty })); //ejecuta 'addToCart' que viene desde el Slice de Cart
     navigate("/cart");
   };
 
-  const submitHandler = async (e) => {
+  /*   const submitHandler = async (e) => {
     e.preventDefault();
 
     try {
@@ -65,7 +51,7 @@ const ProductScreen = () => {
     } catch (error) {
       toast.error(error?.data?.message || error.error);
     }
-  };
+  }; */
 
   //Set postal code
   const [provincia, setProvincia] = useState("Provincia...");
@@ -121,7 +107,11 @@ const ProductScreen = () => {
       ) : (
         <>
           <Meta title={product.name} description={product.description} />
-          <Link className="button--violet volver" to="/">
+          <Link
+            className="button--violet volver"
+            to="/"
+            onClick={() => navigate(-1)}
+          >
             Volver
           </Link>
           <div className="product-container">

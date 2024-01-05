@@ -22,22 +22,21 @@ const app = express(); //Inicializa express
 app.use(cookieParser()); //Nos permite acceder a las cookies
 
 //Para desarrollo
-/* const corsOptions = {
-  origin: "http://localhost:3000", // Reemplaza con el origen exacto de tu cliente
-  credentials: true, // Habilita las solicitudes con credenciales
-}; */
-
-
-//Para produccion
 const corsOptions = {
-  origin: "https://frontend-delta-rouge-29.vercel.app", // Reemplaza con el origen exacto de tu cliente
+  origin: "http://localhost:3000", // Reemplaza con el origen exacto de tu cliente
   credentials: true, // Habilita las solicitudes con credenciales
 };
 
 
+//Para produccion
+/* const corsOptions = {
+  origin: "https://frontend-delta-rouge-29.vercel.app", // Reemplaza con el origen exacto de tu cliente
+  credentials: true, // Habilita las solicitudes con credenciales
+}; */
+
+
 app.use(cors(corsOptions));
 
-/* app.use(cors()) */
 
 
 //Body parser middleware
@@ -69,28 +68,6 @@ app.use(notFound);
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
-
-/*
-//Preparando para produccion
-if(process.env.NODE_ENV === 'production'){
-  //Seteando la carpeta estatica
-  app.use(express.static(path.join(__dirname, '/frontend/build')));
-
-  //Cualquier ruta que no este en la api va a redireccionar a index.html
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
-  });
-} else {
-  app.listen(
-    PORT,
-    console.log(
-      `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold
-    )
-  );
-} */
-
-
-
 
 
 app.listen(
