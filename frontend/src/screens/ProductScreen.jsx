@@ -21,9 +21,13 @@ const ProductScreen = () => {
   const {
     data: product,
     isLoading,
-    /* refetch, */
+    refetch,
     error,
   } = useGetProductDetailsQuery(productId);
+
+  useEffect(() => {
+    console.log(product);
+  }, [product]);
 
   /*   const [createReview, { isLoading: loadingProductReview }] =
     useCreateReviewMutation(); */
@@ -123,7 +127,7 @@ const ProductScreen = () => {
               <p className="product__description__price">${product.price}</p>
               {product.countInStock > 0 && (
                 <div className="product__description__addToCart">
-                  <Form.Select
+                  <select
                     value={qty}
                     onChange={(e) => setQty(Number(e.target.value))}
                   >
@@ -132,7 +136,7 @@ const ProductScreen = () => {
                         {x + 1}
                       </option>
                     ))}
-                  </Form.Select>
+                  </select>
                   <Button
                     className="btn-block button--violet"
                     type="button"
@@ -160,7 +164,7 @@ const ProductScreen = () => {
 
                 <div className="product__resume__shipping--shipping">
                   <img src={require("../media/envio.png")} alt="" />
-                  <Form.Select
+                  <select
                     value={provincia}
                     onChange={(e) => setProvincia(e.target.value)}
                   >
@@ -188,7 +192,7 @@ const ProductScreen = () => {
                     <option>Santiago del Estero</option>
                     <option>Tierra del Fuego</option>
                     <option>Tucumán</option>
-                  </Form.Select>
+                  </select>
                 </div>
               </div>
               <p> Costo del envío: ${shippingPrice}</p>
