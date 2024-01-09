@@ -19,12 +19,12 @@ function Redes() {
             className="redes__link__icon ig"
           />
         </Link>
-        <Link to="https://www.telegram.com" className="redes__link">
+        {/* <Link to="https://www.telegram.com" className="redes__link">
           <FontAwesomeIcon
             icon={faTelegram}
             className="redes__link__icon telegram"
           />
-        </Link>
+        </Link> */}
         <Link to="https://www.youtube.com" className="redes__link">
           <FontAwesomeIcon
             icon={faYoutube}
